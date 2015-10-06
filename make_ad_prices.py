@@ -12,12 +12,9 @@ import pandas as pd
 # import ipdb
 # import json
 import numpy as np
+import os
+import sys
 nrows = None
-
-if False:
-    data = pd.read_csv('data/forGiantOak3/rates.tsv.gz', sep='\t', compression='gzip', header=None, nrows=nrows)
-else:
-    data = pd.read_csv('data/forGiantOak3/rates2.tsv', sep='\t', header=None, nrows=nrows)
 
 
 def all_call_merge(df, merge_dir):
@@ -41,7 +38,16 @@ def all_call_merge(df, merge_dir):
     return df
 
 
+if os.path.exists('data/forGiantOak3/rates2.tsv'):
+    data = pd.read_csv('data/forGiantOak3/rates2.tsv', sep='\t', header=None, nrows=nrows)
+elif os.path.exists('data/forGiantOak3/rates.tsv.gz'):
+    data = pd.read_csv('data/forGiantOak3/rates.tsv.gz', sep='\t', compression='gzip', header=None, nrows=nrows)
+else:
+    sys.exit(1)
+
+
 print('There are %s observations' % data.shape[0])  # about 2.1M
+
 data.rename(columns={0: 'ad_id', 1: 'rate'}, inplace=True)
 data['time_str'] = data['rate'].apply(lambda x: x.split(',')[1])
 data['price'] = data['rate'].apply(lambda x: x.split(',')[0])
@@ -68,14 +74,14 @@ data.ix[:, 'price'] = data['price'].astype('int')
 # sam's rates_locs file from 12/29
 
 # Begin merging information from census
-if False:
-    sexad = pd.read_csv('data/forGiantOak3/isssexad.tsv.gz',
-                        sep='\t', header=None, compression='gzip', nrows=nrows)
-    sexad.rename(columns={0: 'ad_id', 1: 'sex_ad'}, inplace=True)
+if os.path.exists('data/forGiantOak3/isssexad.tsv'):
+    sexad = pd.read_csv('data/forGiantOak3/isssexad.tsv', sep='\t', header=None, nrows=nrows)
+elif os.path.exists('data/forGiantOak3/isssexad.tsv.gz'):
+    sexad = pd.read_csv('data/forGiantOak3/isssexad.tsv.gz', sep='\t', header=None, compression='gzip', nrows=nrows)
 else:
-    sexad = pd.read_csv('data/forGiantOak3/isssexad.tsv',
-                        sep='\t', header=None, nrows=nrows)
-    sexad.rename(columns={0: 'ad_id', 1: 'sex_ad'}, inplace=True)
+    sys.exit(1)
+
+sexad.rename(columns={0: 'ad_id', 1: 'sex_ad'}, inplace=True)
 data = pd.merge(data, sexad, on='ad_id', how='left')
 del sexad
 # data = data[data['sex_ad'] == 1] # remove non- sex ads
@@ -95,19 +101,15 @@ out = pd.merge(data, counts, left_on='ad_id', right_index=True)
 del counts
 
 # Begin using MSA data
-if False:
+if os.path.exists('data/forGiantOak3/msa_locations.tsv'):
+    msa = pd.read_csv('data/forGiantOak3/msa_locations.tsv',
+                      sep='\t', header=None, names=['ad_id', 'census_msa_code'], nrows=nrows)
+elif os.path.exists('data/forGiantOak3/msa_locations.tsv.gz'):
     msa = pd.read_csv('data/forGiantOak3/msa_locations.tsv.gz',
                       sep='\t', header=None, compression='gzip', names=['ad_id' 'census_msa_code'], nrows=nrows)
 else:
-    msa = pd.read_csv('data/forGiantOak3/msa_locations.tsv',
-                      sep='\t', header=None, names=['ad_id', 'census_msa_code'], nrows=nrows)
-if False:
-    cluster = pd.read_csv('data/forGiantOak3/msa_locations.tsv.gz',
-                          sep='\t', header=None, compression='gzip', names=['ad_id', 'census_msa_code'],
-                          nrows=nrows)
-else:
-    msa = pd.read_csv('data/forGiantOak3/msa_locations.tsv',
-                      sep='\t', header=None, names=['ad_id', 'census_msa_code'], nrows=nrows)
+    sys.exit(1)
+
 out = pd.merge(out, msa, how='left')  # Add census MSA code to the fixed price info
 # del msa
 
