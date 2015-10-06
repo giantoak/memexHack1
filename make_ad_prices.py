@@ -54,11 +54,14 @@ data['price'] = data['rate'].apply(lambda x: x.split(',')[0])
 data['unit'] = data['time_str'].apply(lambda x: x.split(' ')[1])
 data = data[data['unit'] != 'DURATION']  # about 1.7M
 print('There are %s observations after dropping no duration prices' % data.shape[0])
-data['timeValue'] = data['time_str'].apply(lambda x: x.split(' ')[0])
-data['unit'][data['unit'] == 'HOURS'] = 'HOUR'
+data['timeValue'] = data['time_str'].apply(lambda x: x.split(' ')[0]).astype(np.int_)
+data.ix[data['unit'] == 'HOURS', 'unit'] = 'HOUR'
 data['minutes'] = np.nan
-data.minutes.loc[data['unit'] == 'MINS'] = data.timeValue.loc[data['unit'] == 'MINS'].astype(np.integer)
-data.minutes.loc[data['unit'] == 'HOUR'] = 60*data.timeValue.loc[data['unit'] == 'HOUR'].astype(np.integer)
+
+
+data.ix[data['unit'] == 'MINS', 'minutes'] = data.ix[data['unit'] == 'MINS', 'timeValue']
+data.ix[data['unit'] == 'HOUR', 'minutes'] = 60 * data.ix[data['unit'] == 'MINS', 'timeValue']
+
 
 dollar_synonyms = ['$', 'roses', 'rose', 'bucks', 'kisses', 'kiss', 'dollars', 'dollar', 'dlr']
 for d_s in dollar_synonyms:
