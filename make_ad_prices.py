@@ -29,8 +29,12 @@ def main():
     # The below blocks of code compute 'price_ratios' which is the ratio of
     # average prices for 1 hour for other ads that also posted the same
     # price
-    minute_values = pd.Series((data['minutes'].value_counts()/data.shape[0] > .0001).index.map(int))
-    minute_string_series = minute_values.map(lambda x: 'price_%s_mins' % x)
+
+    minute_values = pd.Series((data['minutes'].value_counts()/data.shape[0] > .0001)).index.map(np.int_)
+    minute_values.sort()
+    minute_string_series = pd.Series('price_{}_mins'.format(x) for x in minute_values)
+
+    # minute_string_series = minute_values.map(lambda x: 'price_%s_mins' % x)
     minute_string_series.index = minute_values
 
     def get_prices(x):
