@@ -159,9 +159,10 @@ provider_panel.csv: ad_price_ad_level.csv make_provider_panel.py
 msa_characteristics.csv: make_msa_characteristics.py acs.csv violence_nibrs.csv female_violence_nibrs.csv prostitution_nibrs.csv ucr.csv lemas.csv ad_price_ad_level.csv
 	python make_msa_characteristics.py
 
-ad_prices_price_level.csv: make_ad_prices_price_level.py make_ad_zero_prices.py make_ad_prices.py data/forGiantOak3/msa_locations.tsv data/forGiantOak3/doc-provider-timestamp.tsv data/forGiantOak3/isssexad.tsv data/forGiantOak3/ismassageparlorad.tsv data/forGiantOak6/incall-new.tsv
+ad_prices_price_level.csv: make_ad_prices_price_level.py make_ad_zero_prices.py make_ad_price_ad_level.py make_ad_prices.py data/forGiantOak3/msa_locations.tsv data/forGiantOak3/doc-provider-timestamp.tsv data/forGiantOak3/isssexad.tsv data/forGiantOak3/ismassageparlorad.tsv data/forGiantOak6/incall-new.tsv
 	python make_ad_prices_price_level.py
 	python make_ad_zero_prices.py
+	python make_ad_price_ad_level.py
 	python make_ad_prices.py
 ############ End intermediate data targets
 
