@@ -7,6 +7,9 @@ This script takes ad price extraction and creates ad_prices_ad_level.csv (ad lev
 It then creates a data set of only ads with two prices "doubles" with 
 the implied fixed cost 
 """
+from AdPriceHelper import basic_ad_id_loader
+from AdPriceHelper import basic_ad_id_merger
+from AdPriceHelper import all_call_merge
 import pandas as pd
 # import datetime
 # import ipdb
@@ -16,34 +19,6 @@ import os
 import sys
 nrows = None
 
-
-def all_call_merge(df, merge_dir):
-    """
-    Merge in incall, outcall, incalloutcall
-    :param df: Dataframe that needs calls merged in
-    :param str merge_dir: 'right' or 'left'
-    :return: DataFrame with merged calls
-    """
-    for call_type in ['incall', 'outcall', 'incalloutcall']:
-        fpath = 'data/forGiantOak6/{}-new.tsv'.format(call_type)
-        call_input = '{}_input'.format(call_type)
-        no_call_type = 'no_{}'.format(call_type)
-
-        df = df.merge(pd.read_csv(fpath, sep='\t', header=None, names=['ad_id', call_input], nrows=nrows),
-                      how=merge_dir)
-        df[call_type] = df[call_input] == 1
-        df[no_call_type] = df[call_input] == -1
-        del df[call_input]
-
-    return df
-
-
-if os.path.exists('data/forGiantOak3/rates2.tsv'):
-    data = pd.read_csv('data/forGiantOak3/rates2.tsv', sep='\t', header=None, nrows=nrows)
-elif os.path.exists('data/forGiantOak3/rates.tsv.gz'):
-    data = pd.read_csv('data/forGiantOak3/rates.tsv.gz', sep='\t', compression='gzip', header=None, nrows=nrows)
-else:
-    sys.exit(1)
 
 
 print('There are %s observations' % data.shape[0])  # about 2.1M
