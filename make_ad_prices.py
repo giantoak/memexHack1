@@ -30,12 +30,12 @@ minute_string_series.index = minute_values
 
 
 def get_prices(x):
-    out = pd.Series(np.nan, index=minute_values)
+    temp = pd.Series(np.nan, index=minute_values)
     for mins in minute_values:
         matching_prices = x[x['minutes'] == mins]['price']
         if len(matching_prices):
-            out[mins] = matching_prices.mean()
-    return out
+            temp[mins] = matching_prices.mean()
+    return temp
 
 me = data.groupby('ad_id').apply(get_prices)  # This is REALLLLY slow
 price_ratios = pd.Series(np.nan, index=minute_values)
