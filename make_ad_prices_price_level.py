@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+"""
+This script takes ad price extraction and creates ad_prices_ad_level.csv (ad level clean price data)
+"""
 from AdPriceHelper import basic_ad_id_loader
 from AdPriceHelper import basic_ad_id_merger
 from AdPriceHelper import all_call_merge
