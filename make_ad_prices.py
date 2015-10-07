@@ -32,11 +32,12 @@ data = data[data['unit'] != 'DURATION']  # about 1.7M
 print('There are %s observations after dropping no duration prices' % data.shape[0])
 data['timeValue'] = data['time_str'].apply(lambda x: x.split(' ')[0]).astype(np.int_)
 data.ix[data['unit'] == 'HOURS', 'unit'] = 'HOUR'
-data['minutes'] = np.nan
 
 
+# Convert times to minutes
 data.ix[data['unit'] == 'MINS', 'minutes'] = data.ix[data['unit'] == 'MINS', 'timeValue']
 data.ix[data['unit'] == 'HOUR', 'minutes'] = 60 * data.ix[data['unit'] == 'MINS', 'timeValue']
+data.drop(['unit', 'timeValue'], axis=1, inplace=True)
 
 
 dollar_synonyms = ['$', 'roses', 'rose', 'bucks', 'kisses', 'kiss', 'dollars', 'dollar', 'dlr']
@@ -103,8 +104,6 @@ out = basic_ad_id_merger(out,
 
 out = all_call_merge(out, 'left', nrows)
 
-del out['unit']
-del out['timeValue']
 out.to_csv('ad_prices_price_level.csv', index=False)
 
 # Begin work on fixed prices
