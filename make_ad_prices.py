@@ -15,15 +15,16 @@ import pandas as pd
 # import ipdb
 # import json
 import numpy as np
-import os
-import sys
 nrows = None
 
 
+data = basic_ad_id_loader(['data/forGiantOak3/rates2.tsv', 'data/forGiantOak3/rates.tsv.gz'],
+                          ['ad_id', 'rate'],
+                          nrows)
 
 print('There are %s observations' % data.shape[0])  # about 2.1M
 
-data.rename(columns={0: 'ad_id', 1: 'rate'}, inplace=True)
+
 data['time_str'] = data['rate'].apply(lambda x: x.split(',')[1])
 data['price'] = data['rate'].apply(lambda x: x.split(',')[0])
 data['unit'] = data['time_str'].apply(lambda x: x.split(' ')[1])
@@ -52,25 +53,21 @@ data.ix[:, 'price'] = data['price'].astype('int')
 # sam's rates_locs file from 12/29
 
 # Begin merging information from census
-if os.path.exists('data/forGiantOak3/isssexad.tsv'):
-    sexad = pd.read_csv('data/forGiantOak3/isssexad.tsv', sep='\t', header=None, nrows=nrows)
-elif os.path.exists('data/forGiantOak3/isssexad.tsv.gz'):
-    sexad = pd.read_csv('data/forGiantOak3/isssexad.tsv.gz', sep='\t', header=None, compression='gzip', nrows=nrows)
-else:
-    sys.exit(1)
+data = basic_ad_id_merger(data,
+                          ['data/forGiantOak3/isssexad.tsv', 'data/forGiantOak3/isssexad.tsv.gz'],
+                          'left',
+                          ['ad_id', 'sex_ad'],
+                          nrows)
 
-sexad.rename(columns={0: 'ad_id', 1: 'sex_ad'}, inplace=True)
-data = pd.merge(data, sexad, on='ad_id', how='left')
-del sexad
 # data = data[data['sex_ad'] == 1] # remove non- sex ads
 # print('There are %s prices after dropping Non-sex ad prices' % data.shape[0])
 
-
 # Merge in massage parlor information
-massage = pd.read_csv('data/forGiantOak3/ismassageparlorad.tsv', sep='\t', header=None, nrows=nrows)
-massage.rename(columns={0: 'ad_id', 1: 'massage_ad'}, inplace=True)
-data = pd.merge(data, massage, on='ad_id', how='left')
-del massage
+data = basic_ad_id_merger(data,
+                          ['data/forGiantOak3/ismassageparlorad.tsv'],
+                          'left',
+                          ['ad_id', 'massage_ad'],
+                          nrows)
 
 counts = pd.DataFrame(data.groupby('ad_id')['ad_id'].count())
 print('The %s extracted prices pertain to %s observations' % (data.shape[0], counts.shape[0]))
@@ -79,40 +76,32 @@ out = pd.merge(data, counts, left_on='ad_id', right_index=True)
 del counts
 
 # Begin using MSA data
-if os.path.exists('data/forGiantOak3/msa_locations.tsv'):
-    msa = pd.read_csv('data/forGiantOak3/msa_locations.tsv',
-                      sep='\t', header=None, names=['ad_id', 'census_msa_code'], nrows=nrows)
-elif os.path.exists('data/forGiantOak3/msa_locations.tsv.gz'):
-    msa = pd.read_csv('data/forGiantOak3/msa_locations.tsv.gz',
-                      sep='\t', header=None, compression='gzip', names=['ad_id' 'census_msa_code'], nrows=nrows)
-else:
-    sys.exit(1)
+out = basic_ad_id_merger(out,
+                         ['data/forGiantOak3/msa_locations.tsv', 'data/forGiantOak3/msa_locations.tsv.gz'],
+                         'left',
+                         ['ad_id', 'census_msa_code'],
+                         nrows)
 
-out = pd.merge(out, msa, how='left')  # Add census MSA code to the fixed price info
-# del msa
 
 # Merge in cluster ID
-if False:
-    ts = pd.read_csv('data/forGiantOak3/doc-provider-timestamp.tsv.gz',
-                     sep='\t', header=None, compression='gzip', names=['ad_id', 'cluster', 'date_str'], nrows=nrows)
-else:
-    ts = pd.read_csv('data/forGiantOak3/doc-provider-timestamp.tsv',
-                     sep='\t', header=None, names=['ad_id', 'cluster_id', 'date_str'], nrows=nrows)
-out = out.merge(ts, how='left')
-# del ts
+out = basic_ad_id_merger(out,
+                         ['data/forGiantOak3/doc-provider-timestamp.tsv',
+                          'data/forGiantOak3/doc-provider-timestamp.tsv.gz'],
+                         'left',
+                         ['ad_id', 'cluster_id', 'date_str'],
+                         nrows)
+
 out[out['cluster_id'] == '\N'] = np.nan
 out[out['date_str'] == '\N'] = np.nan
 
-
 # Merge in massage parlor flag
-massage = pd.read_csv('data/forGiantOak3/ismassageparlorad.tsv',
-                      sep='\t', header=None, names=['ad_id', 'is_massage_parlor_ad'], nrows=nrows)
-out = out.merge(massage, how='left')
-del massage
+out = basic_ad_id_merger(out,
+                         ['data/forGiantOak3/ismassageparlorad.tsv'],
+                         'left',
+                         ['ad_id', 'is_massage_parlor_ad'],
+                         nrows)
 
-
-out = all_call_merge(out, 'left')
-
+out = all_call_merge(out, 'left', nrows)
 
 del out['unit']
 del out['timeValue']
@@ -222,21 +211,33 @@ out.to_csv('ad_price_ad_level.csv', index=False)
 # see how much stuff is missing...
 del out['cluster_id']
 del out['date_str']
+ts = basic_ad_id_loader(
+    ['data/forGiantOak3/doc-provider-timestamp.tsv', 'data/forGiantOak3/doc-provider-timestamp.tsv.gz'],
+    ['ad_id', 'cluster_id', 'date_str'],
+    nrows)
 out = ts.merge(out, how='outer')
+del ts
 
 del out['census_msa_code']
+msa = basic_ad_id_loader(
+    ['data/forGiantOak3/msa_locations.tsv', 'data/forGiantOak3/msa_locations.tsv.gz'],
+    ['ad_id', 'census_msa_code'],
+    nrows)
 out = msa.merge(out, how='outer')
+del msa
 
 # Merge in massage parlor flag
 del out['is_massage_parlor_ad']
-massage = pd.read_csv('data/forGiantOak3/ismassageparlorad.tsv',
-                      sep='\t', header=None, names=['ad_id', 'is_massage_parlor_ad'], nrows=nrows)
+massage = basic_ad_id_loader(
+    ['data/forGiantOak3/ismassageparlorad.tsv'],
+    ['ad_id', 'is_massage_parlor_ad'],
+    nrows)
 out = out.merge(massage, how='right')
 del massage
 
 del out['incall']
 del out['outcall']
 del out['incalloutcall']
-out = all_call_merge(out, 'right')
+out = all_call_merge(out, 'right', nrows)
 
 out.to_csv('ad_price_ad_level_all.csv', index=False)
