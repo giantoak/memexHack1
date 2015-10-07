@@ -20,13 +20,13 @@ def main():
                               ['ad_id', 'rate'],
                               nrows)
 
-    print('There are %s observations' % data.shape[0])  # about 2.1M
+    print('There are %s observations' % data.shape[0])  # about ~~2.1M~~ 7.6M
 
     data['time_str'] = data['rate'].apply(lambda x: x.split(',')[1])
     data['price'] = data['rate'].apply(lambda x: x.split(',')[0])
     data['unit'] = data['time_str'].apply(lambda x: x.split(' ')[1])
 
-    data = data.ix[data['unit'] != 'DURATION', :]  # about 1.7M
+    data = data.ix[data['unit'] != 'DURATION', :]  # about ~~1.7M~~ 0
     print('There are %s observations after dropping no duration prices' % data.shape[0])
 
     data['timeValue'] = data['time_str'].apply(lambda x: x.split(' ')[0]).astype(np.int_)
