@@ -28,7 +28,7 @@ print('There are %s observations' % data.shape[0])  # about 2.1M
 data['time_str'] = data['rate'].apply(lambda x: x.split(',')[1])
 data['price'] = data['rate'].apply(lambda x: x.split(',')[0])
 data['unit'] = data['time_str'].apply(lambda x: x.split(' ')[1])
-data = data[data['unit'] != 'DURATION']  # about 1.7M
+data = data.ix[data['unit'] != 'DURATION', :]  # about 1.7M
 print('There are %s observations after dropping no duration prices' % data.shape[0])
 data['timeValue'] = data['time_str'].apply(lambda x: x.split(' ')[0]).astype(np.int_)
 data.ix[data['unit'] == 'HOURS', 'unit'] = 'HOUR'
@@ -107,7 +107,7 @@ out = all_call_merge(out, 'left', nrows)
 out.to_csv('ad_prices_price_level.csv', index=False)
 
 # Begin work on fixed prices
-out = out[out['prices_from_ad'] == 2]
+out = out.ix[out['prices_from_ad'] == 2, :]
 print('There are %s ads after restricting to ads with 2 prices' % out.shape[0])
 
 calcs = out.groupby('ad_id').agg({'price': ['min', 'max'], 'minutes': ['min', 'max']})
