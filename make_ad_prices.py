@@ -11,10 +11,12 @@ from AdPriceHelper import basic_ad_id_loader
 from AdPriceHelper import all_call_merge
 import pandas as pd
 import numpy as np
-nrows = None
 
 
 def main():
+    print('==== Beginning make_ad_prices.py ====')
+
+    nrows = None
 
     # Re-read ad_prices_price_level.csv to aggregate from file
     data = pd.read_csv('ad_prices_price_level.csv')
