@@ -23,21 +23,35 @@ def main():
     # price
 
     minute_values = pd.Series((data['minutes'].value_counts()/data.shape[0] > .0001)).index.map(np.int_)
+    if 60 not in minute_values:
+        minute_values = np.append(minute_values, 60)
     minute_values.sort()
     minute_string_series = pd.Series('price_{}_mins'.format(x) for x in minute_values)
 
     # minute_string_series = minute_values.map(lambda x: 'price_%s_mins' % x)
     minute_string_series.index = minute_values
 
-    def get_prices(x):
-        temp = pd.Series(np.nan, index=minute_values)
-        for mins in minute_values:
-            matching_prices = x[x['minutes'] == mins]['price']
-            if len(matching_prices):
-                temp[mins] = matching_prices.mean()
-        return temp
+    # def get_prices(x):
+    #     temp = pd.Series(np.nan, index=minute_values)
+    #     for mins in minute_values:
+    #         matching_prices = x.ix[x['minutes'] == mins, 'price']
+    #         if len(matching_prices):
+    #             temp[mins] = matching_prices.mean()
+    #     return temp
 
-    me = data.groupby('ad_id').apply(get_prices)  # This is REALLLLY slow
+    def get_prices_five(df):
+        return pd.pivot_table(df.ix[df['minutes'].apply(lambda x: x in minute_values),
+                                    ['ad_id', 'minutes', 'price']].groupby(['ad_id', 'minutes']).mean().reset_index(),
+                              index='ad_id',
+                              columns='minutes')
+
+    # me = data.groupby('ad_id').apply(get_prices)  # This is REALLLLY slow
+    me = get_prices_five(data)  # This is WAAAY faster!
+    me.columns = me.columns.levels[1]
+    for m_v in minute_values:
+        if m_v not in me.columns:
+            me[m_v] = np.nan
+
     price_ratios = pd.Series(np.nan, index=minute_values)
     price_ratios_counts = pd.Series(np.nan, index=minute_values)
     for m in minute_values:
