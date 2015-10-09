@@ -22,7 +22,7 @@ def main():
     # see how much stuff is missing...
 
     # Drop columns to be re-added
-    out.drop(['cluster_id', 'date_str'
+    out.drop(['cluster_id', 'date_str',
               'census_msa_code',
               'is_massage_parlor_ad',
               'incall', 'outcall', 'incalloutcall'],
