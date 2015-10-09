@@ -34,7 +34,7 @@ def main():
 
     # Convert times to minutes
     data.ix[data['unit'] == 'MINS', 'minutes'] = data.ix[data['unit'] == 'MINS', 'timeValue']
-    data.ix[data['unit'] == 'HOUR', 'minutes'] = 60 * data.ix[data['unit'] == 'MINS', 'timeValue']
+    data.ix[data['unit'] == 'HOUR', 'minutes'] = 60 * data.ix[data['unit'] == 'HOUR', 'timeValue']
     data.drop(['unit', 'timeValue'], axis=1, inplace=True)
 
     # Clean up currencies
