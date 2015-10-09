@@ -1,55 +1,72 @@
-import pandas
+import pandas as pd
 import numpy as np
-d = pandas.read_csv('temp.csv') # ad_price_ad_level.csv, but with cluster_count column
-d=d[~d['spam']]
-d=d[d['price_per_hour'] <= 1000]
-msa_characteristics = pandas.read_csv('../../msa_characteristics.csv')
+d = pd.read_csv('temp.csv') # ad_price_ad_level.csv, but with cluster_count column
+d = d.ix[~d['spam'], :]
+d = d.ix[d['price_per_hour'] <= 1000, :]
+msa_characteristics = pd.read_csv('../../msa_characteristics.csv')
 
-census_names = pandas.read_csv('../../qcew_msa.txt', sep='\t')
-census_names['census_msa_code']=census_names['qcew_code'].apply(lambda x: '31000US%s0' % x.replace('C','')) # 310000 is the MSA code
-msa_name_lookup = {row['census_msa_code']:row['msa'] for index, row in census_names.iterrows()}
+census_names = pd.read_csv('../../qcew_msa.txt', sep='\t')
+census_names['census_msa_code'] = census_names['qcew_code'].apply(lambda x: '31000US%s0' % x.replace('C', '')) # 310000 is the MSA code
+msa_name_lookup = {row['census_msa_code']: row['msa'] for index, row in census_names.iterrows()}
+
+
 def lookup(x):
     try:
         return(msa_name_lookup[x])
     except:
         return(np.nan)
+
 d['msa'] = d['census_msa_code'].apply(lookup)
-d=d.merge(msa_characteristics[['census_msa_code','population']])
+d = d.merge(msa_characteristics[['census_msa_code', 'population']])
 d['log_price_per_hour'] = np.log(d['price_per_hour'])
 
+
 def desc(name):
-    a=d.groupby(name)['price_per_hour'].describe()
+    a = d.groupby(name)['price_per_hour'].describe()
     print(a)
     print(a[True] - a[False])
 
 d['site'] = d['ad_id'].apply(lambda x: x.split(':')[0])
-d['size'] = 'unset'
-d['size'][(d['cluster_count'] >= 200)] = 5
-d['size'][(d['cluster_count'] >= 100) & (d['cluster_count'] < 200)] = 4
-d['size'][(d['cluster_count'] >= 50) & (d['cluster_count'] < 100)] = 3
-d['size'][(d['cluster_count'] >= 20) & (d['cluster_count'] < 50)] = 2
-d['size'][(d['cluster_count'] >= 5) & (d['cluster_count'] < 20)] = 1
-d['size'][d['cluster_count'] < 5] = 0
+
+
+def sizer(val):
+    if val >= 200:
+        return 5
+    if val >= 100:
+        return 4
+    if val >= 50:
+        return 3
+    if val >= 20:
+        return 2
+    if val >= 5:
+        return 1
+    elif val < 5:
+        return 0
+    return 'unset'
+
+d['size'] = d['cluster_count'].apply(sizer)
 size_mapping = {
-        0:'< 5',
-        1:'5 to 19',
-        2:'20 to 49',
-        3:'50 to 99',
-        4:'100 to 199',
-        5:'200 +',
+        0: '< 5',
+        1: '5 to 19',
+        2: '20 to 49',
+        3: '50 to 99',
+        4: '100 to 199',
+        5: '200 +',
         }
 print(d.groupby('site')['price_per_hour'].describe())
 print(d.groupby('size')['price_per_hour'].describe())
 a=d.groupby('site')['price_per_hour'].aggregate([np.mean, np.std, np.size, lambda x: np.std(x)/np.sqrt(len(x))]) 
 a = a.sort('mean')
-print(a) #  craigslist and massage troll (both of which are massage heavy) have lower prices. Utopia guide appears upscale
+print(a)  # craigslist and massage troll (both of which are massage heavy) have lower prices. Utopia guide appears
+# upscale
 
-msa=d.groupby('msa')['price_per_hour'].aggregate([np.mean, np.std, np.size, lambda x: np.std(x)/np.sqrt(len(x))]) 
+msa = d.groupby('msa')['price_per_hour'].aggregate([np.mean, np.std, np.size, lambda x: np.std(x)/np.sqrt(len(x))])
 msa = msa.sort('mean')
 # Note: boston () has a high mean compared to riversid (31000US40140) of
 # 125
 
-lmsa=d.groupby('msa')['log_price_per_hour'].aggregate([np.mean, np.std, np.size, lambda x: np.std(x)/np.sqrt(len(x))]) 
+lmsa = d.groupby('msa')['log_price_per_hour'].aggregate([np.mean, np.std, np.size, lambda x: np.std(x)/np.sqrt(len(
+    x))])
 lmsa = lmsa.sort('mean')
 
 print('look at correlations between group size and price')
