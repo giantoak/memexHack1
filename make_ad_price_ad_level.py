@@ -58,8 +58,8 @@ def main():
     price_ratios_counts = me.apply(lambda x: x.dropna().shape[0])
 
     print('Computed price ratios for acts of given length to acts of 1 hour')
-    print('price_ratios: {}'.format(price_ratios))
-    print('price_ratios_counts: {}'.format(price_ratios_counts))
+    print('price_ratios:\n{}'.format(price_ratios))
+    print('price_ratios_counts:\n{}'.format(price_ratios_counts))
 
     # Now split the data by whether there's a posted price of 1 hr
     data['1hr'] = data['time_str'] == '1 HOUR'
