@@ -26,10 +26,8 @@ def main():
     if 60 not in minute_values:
         minute_values = np.append(minute_values, 60)
     minute_values.sort()
-    minute_string_series = pd.Series('price_{}_mins'.format(x) for x in minute_values)
-
-    # minute_string_series = minute_values.map(lambda x: 'price_%s_mins' % x)
-    minute_string_series.index = minute_values
+    minute_string_series = pd.Series(['price_{}_mins'.format(x) for x in minute_values],
+                                     index=minute_values)
 
     # def get_prices(x):
     #     temp = pd.Series(np.nan, index=minute_values)
@@ -52,13 +50,12 @@ def main():
         if m_v not in me.columns:
             me[m_v] = np.nan
 
-    price_ratios = pd.Series(np.nan, index=minute_values)
-    price_ratios_counts = pd.Series(np.nan, index=minute_values)
-    for m in minute_values:
-        hour_price = me[(~me[60].isnull()) & (~me[m].isnull())][60].mean()
-        m_price = me[(~me[m].isnull()) & (~me[m].isnull())][m].mean()
-        price_ratios[m] = hour_price/m_price
-        price_ratios_counts[m] = me[(~me[m].isnull()) & (~me[m].isnull())].shape[0]
+    def get_price_ratio(minute_slice):
+        hour_price = me.ix[(~me[60].isnull() & ~minute_slice.isnull()), 60].mean()
+        return hour_price/minute_slice.mean()
+
+    price_ratios = me.apply(get_price_ratio, axis=0)
+    price_ratios_counts = me.apply(lambda x: x.dropna().shape[0])
 
     print('Computed price ratios for acts of given length to acts of 1 hour')
     print('price_ratios: {}'.format(price_ratios))
