@@ -19,7 +19,6 @@ time_place_market_segments = place + time + market_segments
 time_place = place + time
 place_market_segments = place + market_segments
 
-import ipdb; ipdb.set_trace()
 # Create month/year values
 data = data[~data['date_str'].isnull()]
 data = data[~data['census_msa_code'].isnull()]
@@ -60,7 +59,6 @@ def gmean(x):
     return np.exp(np.log(x).mean())
 
 m = data.groupby(time_place_market_segments)['price_per_hour'].aggregate({'gmean': gmean, 'size': np.size})
-import ipdb; ipdb.set_trace()
 # This is the key groupby command. It computes a geometric mean and also
 # the number of ads in a given place/time
 m=m.reset_index()

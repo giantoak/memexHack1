@@ -64,10 +64,12 @@ def census(v1, v2, listall=True):
         names = []
         for i in list(l1):
             try:
+                if 'Atlanta' in msa_name_lookup[i]:
+                    print((i, msa_name_lookup[i]))
                 names.append(msa_name_lookup[i])
             except KeyError:
                 print('Error finding MSA for %s' % i)
-        print('\n'.join(names))
+        #print('\n'.join(names))
     print('Second input: %s' % len(l2))
     if listall:
         names = []
@@ -76,17 +78,24 @@ def census(v1, v2, listall=True):
                 names.append(msa_name_lookup[i])
             except KeyError:
                 print('Error finding MSA for %s' % i)
-        print('\n'.join(names))
+        #print('\n'.join(names))
+        #print('\n'.join([i for i in names if 'India' in i]))
     print('Intersection: %s' % len(l1.intersection(l2)))
     print('Difference 2 minus 1: %s' % len(l2.difference(l1)))
     if listall:
         names = []
         for i in list(l2.difference(l1)):
             try:
+                if 'Atlanta' in msa_name_lookup[i]:
+                    print((i, msa_name_lookup[i]))
                 names.append(msa_name_lookup[i])
             except KeyError:
                 print('Error finding MSA for %s' % i)
-        print('\n'.join(names))
+        print('\n'.join([i for i in names if 'Atlanta' in i]))
+        #print(v1.loc[v1['msa'].isin([i for i in names if 'India' in i]),['msa','census_msa_code']])
+        #print(v2.loc[v2['msa'].isin([i for i in names if 'India' in i]),['msa','census_msa_code']])
+        #print('\n'.join(names))
+        #print('\n'.join([i for i in names if 'India' in i]))
 
 
 census_names['census_msa_code'] = census_names['qcew_code'].apply(lambda x: '31000US%s0' % x.replace('C', ''))  # 310000 is the MSA code
@@ -94,15 +103,24 @@ msa_name_lookup = {row['census_msa_code']: row['msa'] for index, row in census_n
 
 
 # End test code 7/1
-# ipdb.set_trace()
+import ipdb; ipdb.set_trace()
 wage_instruments = pd.read_csv('month_msa_wage_instruments.csv')
 wage_instruments['msa'] = wage_instruments['census_msa_code'].apply(lambda x: msa_name_lookup[x])
+census(wage_instruments, msa_ad_aggregates, listall=False)
 msa_ad_aggregates = msa_ad_aggregates[~msa_ad_aggregates['census_msa_code'].isin(['Service', 'Pennsylvannia'])]
+census(msa_ad_aggregates, ucr, listall=False)
 out = pd.merge(msa_ad_aggregates, ucr, how='outer')
+census(out, nibrs, listall=False)
 out = pd.merge(out, nibrs, how='outer')
+census(out, wage_instruments, listall=False)
 out = pd.merge(out, wage_instruments, how='outer')
 #out = out.merge(provider_stats, right_index=True, left_on=['census_msa_code', 'year', 'month'], how='outer')
 #out = out.merge(provider_counts_with_price, right_index=True, left_on=['census_msa_code', 'year', 'month'], how='outer')
 #out = out.merge(provider_counts_total, right_index=True, left_on=['census_msa_code', 'year', 'month'], how='outer')
+print('There are %s msa-months overall' % (out.shape[0]))
+print('There are %s msa-months where ad stats merged' % (out[(~out.ad_p50_monthly.isnull())].shape[0]))
+print('There are %s msa-months where ad stats and NIBRS merged' % (out[(~out.ad_p50_monthly.isnull()) & (~out.number_of_incidents_total.isnull())].shape[0]))
+print('There are %s msa-months where just NIBRS merged' % (out[(~out.number_of_incidents_total.isnull())].shape[0]))
+print('There are %s msa-months where just UCR merged' % (out[(~out.violent.isnull())].shape[0]))
 out.to_csv('msa_month_characteristics.csv', index=False)
 out = out.merge(census_names)

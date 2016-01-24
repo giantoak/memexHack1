@@ -97,7 +97,7 @@ del counts
 # Begin using MSA data
 msa = pd.read_csv('data/cdr/cbsa-text-and-dom-and-url.tsv',
                       sep='\t', header=None, names=['ad_id', 'census_msa_code_short','msa_name','macro_micro'], nrows=nrows)
-msa['census_msa_code'] = msa['census_msa_code_short'].apply(lambda x: '31000US%s0' % x)  # 310000 is the MSA code
+msa['census_msa_code'] = msa['census_msa_code_short'].apply(lambda x: '31000US%s' % x)  # 310000 is the MSA code
 del msa['census_msa_code_short']
 
 out = pd.merge(out, msa, how='left')  # Add census MSA code to the fixed price info
@@ -214,7 +214,7 @@ price_level_no_hourly['price_per_hour'] = price_level_no_hourly_prices
 price_level = pd.concat([price_level_hourly, price_level_no_hourly], axis=0)
 price_level.sort('1hr', ascending=False, inplace=True)
 ad_level_prices = pd.DataFrame(price_level.groupby('ad_id')['price_per_hour'].mean(), columns=['price_per_hour'])
-ad_level = price_level.drop_duplicates('ad_id')[['ad_id', 'sex_ad', 'census_msa_code', 'cluster_id', 'date_str',
+ad_level = price_level.drop_duplicates('ad_id')[['ad_id', 'site', 'sex_ad', 'census_msa_code', 'cluster_id', 'date_str',
                                                  'is_massage_parlor_ad', '1hr', 'incall', 'outcall'
                                                  ]]
 out = pd.merge(ad_level_prices, ad_level, left_index=True, right_on='ad_id', how='left')
