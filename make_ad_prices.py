@@ -9,15 +9,12 @@ the implied fixed cost
 """
 import pandas as pd
 # import datetime
-# import ipdb
+import ipdb
 # import json
 import numpy as np
 nrows = None
 
-if False:
-    data = pd.read_csv('data/forGiantOak3/rates.tsv.gz', sep='\t', compression='gzip', header=None, nrows=nrows)
-else:
-    data = pd.read_csv('data/forGiantOak3/rates2.tsv', sep='\t', header=None, nrows=nrows)
+data = pd.read_csv('data/cdr/rates-text.tsv', sep='\t', header=None, nrows=nrows)
 
 
 def all_call_merge(df, merge_dir):
@@ -42,7 +39,7 @@ def all_call_merge(df, merge_dir):
 
 
 print('There are %s observations' % data.shape[0])  # about 2.1M
-data.rename(columns={0: 'ad_id', 1: 'rate'}, inplace=True)
+data.rename(columns={1: 'ad_id', 2: 'rate'}, inplace=True)
 data['time_str'] = data['rate'].apply(lambda x: x.split(',')[1])
 data['price'] = data['rate'].apply(lambda x: x.split(',')[0])
 data['unit'] = data['time_str'].apply(lambda x: x.split(' ')[1])
@@ -68,23 +65,26 @@ data.ix[:, 'price'] = data['price'].astype('int')
 # sam's rates_locs file from 12/29
 
 # Begin merging information from census
-if False:
-    sexad = pd.read_csv('data/forGiantOak3/isssexad.tsv.gz',
-                        sep='\t', header=None, compression='gzip', nrows=nrows)
-    sexad.rename(columns={0: 'ad_id', 1: 'sex_ad'}, inplace=True)
-else:
-    sexad = pd.read_csv('data/forGiantOak3/isssexad.tsv',
-                        sep='\t', header=None, nrows=nrows)
-    sexad.rename(columns={0: 'ad_id', 1: 'sex_ad'}, inplace=True)
-data = pd.merge(data, sexad, on='ad_id', how='left')
-del sexad
+#if False:
+    #sexad = pd.read_csv('data/forGiantOak3/isssexad.tsv.gz',
+                        #sep='\t', header=None, compression='gzip', nrows=nrows)
+    #sexad.rename(columns={0: 'ad_id', 1: 'sex_ad'}, inplace=True)
+#else:
+    #sexad = pd.read_csv('data/forGiantOak3/isssexad.tsv',
+                        #sep='\t', header=None, nrows=nrows)
+    #sexad.rename(columns={0: 'ad_id', 1: 'sex_ad'}, inplace=True)
+#data = pd.merge(data, sexad, on='ad_id', how='left')
+#del sexad
+data['sex_ad']=np.nan
 # data = data[data['sex_ad'] == 1] # remove non- sex ads
 # print('There are %s prices after dropping Non-sex ad prices' % data.shape[0])
 
 
 # Merge in massage parlor information
-massage = pd.read_csv('data/forGiantOak3/ismassageparlorad.tsv', sep='\t', header=None, nrows=nrows)
-massage.rename(columns={0: 'ad_id', 1: 'massage_ad'}, inplace=True)
+massage = pd.read_csv('data/cdr/ismassageparlorad_text.tsv', sep='\t', header=None, nrows=nrows)
+massage.rename(columns={0: 'ad_id', 1: 'is_massage_parlor_ad_text'}, inplace=True)
+massage['is_massage_parlor_ad'] = massage['is_massage_parlor_ad_text'] == 'massage parlor'
+massage.loc[massage['is_massage_parlor_ad_text'] == 'unknown','is_massage_parlor_ad'] = np.nan
 data = pd.merge(data, massage, on='ad_id', how='left')
 del massage
 
@@ -95,43 +95,38 @@ out = pd.merge(data, counts, left_on='ad_id', right_index=True)
 del counts
 
 # Begin using MSA data
-if False:
-    msa = pd.read_csv('data/forGiantOak3/msa_locations.tsv.gz',
-                      sep='\t', header=None, compression='gzip', names=['ad_id' 'census_msa_code'], nrows=nrows)
-else:
-    msa = pd.read_csv('data/forGiantOak3/msa_locations.tsv',
-                      sep='\t', header=None, names=['ad_id', 'census_msa_code'], nrows=nrows)
-if False:
-    cluster = pd.read_csv('data/forGiantOak3/msa_locations.tsv.gz',
-                          sep='\t', header=None, compression='gzip', names=['ad_id', 'census_msa_code'],
-                          nrows=nrows)
-else:
-    msa = pd.read_csv('data/forGiantOak3/msa_locations.tsv',
-                      sep='\t', header=None, names=['ad_id', 'census_msa_code'], nrows=nrows)
+msa = pd.read_csv('data/cdr/cbsa-text-and-dom-and-url.tsv',
+                      sep='\t', header=None, names=['ad_id', 'census_msa_code_short','msa_name','macro_micro'], nrows=nrows)
+msa['census_msa_code'] = msa['census_msa_code_short'].apply(lambda x: '31000US%s0' % x)  # 310000 is the MSA code
+del msa['census_msa_code_short']
+
 out = pd.merge(out, msa, how='left')  # Add census MSA code to the fixed price info
-# del msa
+del msa
 
-# Merge in cluster ID
-if False:
-    ts = pd.read_csv('data/forGiantOak3/doc-provider-timestamp.tsv.gz',
-                     sep='\t', header=None, compression='gzip', names=['ad_id', 'cluster', 'date_str'], nrows=nrows)
-else:
-    ts = pd.read_csv('data/forGiantOak3/doc-provider-timestamp.tsv',
-                     sep='\t', header=None, names=['ad_id', 'cluster_id', 'date_str'], nrows=nrows)
-out = out.merge(ts, how='left')
+# Merge in cluster ID from phones
+phones = pd.read_csv('data/cdr/phone_numbers-text.tsv',
+                     sep='\t', header=None, names=['ad_id', 'cluster_id'], nrows=nrows)
+out = out.merge(phones, how='left')
+out.loc[out['cluster_id'].isnull(), 'cluster_id'] = range(out['cluster_id'].isnull().sum())
 # del ts
-out[out['cluster_id'] == '\N'] = np.nan
-out[out['date_str'] == '\N'] = np.nan
+del phones
+
+# merge in date
+dates = pd.read_csv('data/dates_cdr.tsv', sep='\t', nrows=nrows, header=None, names=['ad_id','date_str'])
+out = out.merge(dates, how='left')
 
 
-# Merge in massage parlor flag
-massage = pd.read_csv('data/forGiantOak3/ismassageparlorad.tsv',
-                      sep='\t', header=None, names=['ad_id', 'is_massage_parlor_ad'], nrows=nrows)
-out = out.merge(massage, how='left')
-del massage
+#out = all_call_merge(out, 'left')
+incall_outcall = pd.read_csv('data/cdr/service-text.tsv', sep='\t', nrows=nrows, header=None, names=['ad_id','incall_text'])
+incall_outcall['incall'] = (incall_outcall['incall_text'] == 'incall') | (incall_outcall['incall_text'] == 'incall and outcall')
+incall_outcall['outcall'] = (incall_outcall['incall_text'] == 'outcall') | (incall_outcall['incall_text'] == 'incall and outcall')
+del incall_outcall['incall_text']
+out = out.merge(incall_outcall, how='left')
+del incall_outcall
 
-
-out = all_call_merge(out, 'left')
+sites = pd.read_csv('data/websites.tsv', sep='\t', nrows=nrows, header=None, names=['ad_id','site'])
+out = out.merge(sites, how='left')
+del sites
 
 
 del out['unit']
@@ -170,31 +165,35 @@ print(data.shape)
 # The below blocks of code compute 'price_ratios' which is the ratio of
 # average prices for 1 hour for other ads that also posted the same
 # price
-minute_values = pd.Series((data['minutes'].value_counts()/data.shape[0] > .0001).index.map(int))
-minute_string_series = minute_values.map(lambda x: 'price_%s_mins' % x)
-minute_string_series.index = minute_values
+#minute_values = pd.Series((data['minutes'].value_counts()/data.shape[0] > .0001).index.map(int))
+#minute_string_series = minute_values.map(lambda x: 'price_%s_mins' % x)
+#minute_string_series.index = minute_values
 
 
-def get_prices(x):
-    out = pd.Series(np.nan, index=minute_values)
-    for mins in minute_values:
-        matching_prices = x[x['minutes'] == mins]['price']
-        if len(matching_prices):
-            out[mins] = matching_prices.mean()
-    return out
+#def get_prices(x):
+    #out = pd.Series(np.nan, index=minute_values)
+    #for mins in minute_values:
+        #matching_prices = x[x['minutes'] == mins]['price']
+        #if len(matching_prices):
+            #out[mins] = matching_prices.mean()
+    #return out
 
-me = data.groupby('ad_id').apply(get_prices)  # This is REALLLLY slow
-price_ratios = pd.Series(np.nan, index=minute_values)
-price_ratios_counts = pd.Series(np.nan, index=minute_values)
-for m in minute_values:
-    hour_price = me[(~me[60].isnull()) & (~me[m].isnull())][60].mean()
-    m_price = me[(~me[m].isnull()) & (~me[m].isnull())][m].mean()
-    price_ratios[m] = hour_price/m_price
-    price_ratios_counts[m] = me[(~me[m].isnull()) & (~me[m].isnull())].shape[0]
+#me = data.groupby('ad_id').apply(get_prices)  # This is REALLLLY slow
+#price_ratios = pd.Series(np.nan, index=minute_values)
+#price_ratios_counts = pd.Series(np.nan, index=minute_values)
+#for m in minute_values:
+    #hour_price = me[(~me[60].isnull()) & (~me[m].isnull())][60].mean()
+    #m_price = me[(~me[m].isnull()) & (~me[m].isnull())][m].mean()
+    #price_ratios[m] = hour_price/m_price
+    #price_ratios_counts[m] = me[(~me[m].isnull()) & (~me[m].isnull())].shape[0]
 
-print('Computed price ratios for acts of given length to acts of 1 hour')
-print(price_ratios)
-print(price_ratios_counts)
+#print('Computed price ratios for acts of given length to acts of 1 hour')
+#print(price_ratios)
+#print(price_ratios_counts)
+price_ratios=pd.read_csv('price_ratios.csv', header=None, names=['minutes','ratio'])
+price_ratios = price_ratios.set_index('minutes')['ratio']
+price_ratios_counts=pd.read_csv('price_ratios_counts.csv', header=None, names=['minutes','ratio'])
+price_ratios_counts = price_ratios_counts.set_index('minutes')['ratio']
 
 # Now split the data by whether there's a posted price of 1 hr
 data['1hr'] = data['time_str'] == '1 HOUR'
@@ -216,8 +215,8 @@ price_level = pd.concat([price_level_hourly, price_level_no_hourly], axis=0)
 price_level.sort('1hr', ascending=False, inplace=True)
 ad_level_prices = pd.DataFrame(price_level.groupby('ad_id')['price_per_hour'].mean(), columns=['price_per_hour'])
 ad_level = price_level.drop_duplicates('ad_id')[['ad_id', 'sex_ad', 'census_msa_code', 'cluster_id', 'date_str',
-                                                 'is_massage_parlor_ad', '1hr', 'incall', 'no_incall', 'outcall',
-                                                 'no_outcall', 'incalloutcall', 'no_incalloutcall']]
+                                                 'is_massage_parlor_ad', '1hr', 'incall', 'outcall'
+                                                 ]]
 out = pd.merge(ad_level_prices, ad_level, left_index=True, right_on='ad_id', how='left')
 # Clean up some unused data...
 print('cleaning up old data...')
@@ -231,32 +230,28 @@ spam = pd.DataFrame(out.groupby('cluster_id').apply(lambda x: x.shape[0] > 200),
 spam.reset_index(inplace=True)
 out = out.merge(spam)
 
-# Add site filter
-out['site'] = out['ad_id'].apply(lambda x: x.split(':')[0])
-
 # Compute the cluster size
 out = out.merge(out.groupby('cluster_id').size().to_frame('cluster_count').reset_index())
 out.to_csv('ad_price_ad_level.csv', index=False)
 
-# Now begin rebuilding DF by merging in original raw files, so we can
-# see how much stuff is missing...
-del out['cluster_id']
-del out['date_str']
-out = ts.merge(out, how='outer')
+## Now begin rebuilding DF by merging in original raw files, so we can
+## see how much stuff is missing...
+#del out['cluster_id']
+#del out['date_str']
 
-del out['census_msa_code']
-out = msa.merge(out, how='outer')
+#del out['census_msa_code']
+#out = msa.merge(out, how='outer')
 
-# Merge in massage parlor flag
-del out['is_massage_parlor_ad']
-massage = pd.read_csv('data/forGiantOak3/ismassageparlorad.tsv',
-                      sep='\t', header=None, names=['ad_id', 'is_massage_parlor_ad'], nrows=nrows)
-out = out.merge(massage, how='right')
-del massage
+## Merge in massage parlor flag
+#del out['is_massage_parlor_ad']
+#massage = pd.read_csv('data/forGiantOak3/ismassageparlorad.tsv',
+                      #sep='\t', header=None, names=['ad_id', 'is_massage_parlor_ad'], nrows=nrows)
+#out = out.merge(massage, how='right')
+#del massage
 
-del out['incall']
-del out['outcall']
-del out['incalloutcall']
-out = all_call_merge(out, 'right')
+#del out['incall']
+#del out['outcall']
+#del out['incalloutcall']
+#out = all_call_merge(out, 'right')
 
-out.to_csv('ad_price_ad_level_all.csv', index=False)
+#out.to_csv('ad_price_ad_level_all.csv', index=False)

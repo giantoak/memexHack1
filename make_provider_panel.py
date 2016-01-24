@@ -7,7 +7,7 @@ import numpy as np
 data = pd.read_csv('ad_price_ad_level.csv')
 data = data[~data['date_str'].isnull()]
 data = data[~data['census_msa_code'].isnull()]
-data['date'] = data['date_str'].apply(lambda x: datetime.datetime.strptime(x, '%Y-%m-%d %H:%M:%S'))
+data['date'] = data['date_str'].apply(lambda x: datetime.datetime.strptime(x, '%Y-%m-%d'))
 data.index = pd.DatetimeIndex(data['date'])
 data = data.reindex()
 data['month'] = data['date'].apply(lambda x: int(x.strftime('%m')))
@@ -36,7 +36,7 @@ def unique_msa_if_exists(x):
 # Assign providers to MSA at the monthly level
 f = clusters.groupby(['cluster_id', 'year', 'month'])['census_msa_code'].apply(unique_msa_if_exists)  # Grab unique MSA, if there is one
 f = pd.DataFrame(f[~f.isnull()], columns=['census_msa_code'])
-g = pd.DataFrame(clusters.groupby(['cluster_id)', 'year)', 'month'])['price_per_hour'].size(),
+g = pd.DataFrame(clusters.groupby(['cluster_id', 'year', 'month'])['price_per_hour'].size(),
                  columns=['num_ads_in_cluster_month_with_price'])
 h = pd.DataFrame(clusters.groupby(['cluster_id', 'year', 'month'])['census_msa_code'].size(),
                  columns=['num_ads_in_cluster_month_total'])

@@ -7,7 +7,7 @@ import numpy as np
 data = pd.read_csv('ad_price_ad_level.csv')
 data = data[~data['date_str'].isnull()]
 data = data[~data['census_msa_code'].isnull()]
-data['date'] = data['date_str'].apply(lambda x: datetime.strptime(x, '%Y-%m-%d %H:%M:%S'))
+data['date'] = data['date_str'].apply(lambda x: datetime.strptime(x, '%Y-%m-%d'))
 data.index = pd.DatetimeIndex(data['date'])
 data = data.reindex()
 data['month'] = data['date'].apply(lambda x: int(x.strftime('%m')))
@@ -31,9 +31,7 @@ month_msa_aggregate_prices['dp'] = month_msa_aggregate_prices['date_str'].apply(
 
 # Do MSA-month aggregations of incall/outcall rates
 month_msa_ad_types = data.groupby(['month', 'year', 'census_msa_code'])['is_massage_parlor_ad',
-                                                                        'incall', 'no_incall',
-                                                                        'outcall', 'no_outcall',
-                                                                        'incalloutcall', 'no_incalloutcall'].mean()
+                                                                        'incall' ].mean()
 month_msa_ad_types.reset_index(inplace=True)
 month_msa_aggregate_prices = month_msa_aggregate_prices.merge(month_msa_ad_types)
 

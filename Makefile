@@ -20,30 +20,30 @@ ucr_lemas_msa.csv:
 	$(HTTP_GET) http://$(EXPORT_BUCKET).s3.amazonaws.com/sex_ad_analysis/input/ucr_lemas_msa.csv
 
 ### Data from Stanford
-data/forGiantOak3/doc-provider-timestamp.tsv:
-	# Get data from the Deep Dive data drop, and extract it
-	$(GET_FROM_DEEPDIVE_S3) s3://memex-data/escort_beta/forGiantOak3.tgz .
-	tar xvf forGiantOak3.tgz -C data/
-	$(GET_FROM_DEEPDIVE_S3) s3://memex-data/escort_beta/rates2.tsv.gz .
-	mv rates2.tsv.gz data/forGiantOak3/
-	gunzip -f data/forGiantOak3/rates2.tsv.gz
-data/forGiantOak3/ismassageparlorad.tsv:
-	# Get massage parlor extraction from the Deep Dive data drop, and extract it
-	$(GET_FROM_DEEPDIVE_S3) s3://memex-data/escort_beta/ismassageparlorad.tsv.gz
-	gunzip -f ismassageparlorad.tsv.gz
-	mv ismassageparlorad.tsv data/forGiantOak3/
-data/forGiantOak3/msa_locations.tsv: data/forGiantOak3/doc-provider-timestamp.tsv
-	$(GET_FROM_DEEPDIVE_S3) s3://memex-data/escort_beta/msa_locations_round2.tsv.gz
-	gunzip msa_locations_round2.tsv.gz
-	mv msa_locations_round2.tsv data/forGiantOak3/msa_locations.tsv
-data/forGiantOak6/incall-new.tsv:
-	$(GET_FROM_DEEPDIVE_S3) s3://memex-data/escort_beta/forGiantOak6.tgz
-	tar xvf forGiantOak6.tgz -C data/
-	rm forGiantOak6.tgz
-data/forGiantOak3/isssexad.tsv:
-	# Get the sex ad flag from deep dive
-	$(HTTP_GET) http://$(EXPORT_BUCKET).s3.amazonaws.com/sex_ad_analysis/input/isssexad.tsv
-	mv isssexad.tsv data/forGiantOak3/
+#data/forGiantOak3/doc-provider-timestamp.tsv:
+	## Get data from the Deep Dive data drop, and extract it
+	#$(GET_FROM_DEEPDIVE_S3) s3://memex-data/escort_beta/forGiantOak3.tgz .
+	#tar xvf forGiantOak3.tgz -C data/
+	#$(GET_FROM_DEEPDIVE_S3) s3://memex-data/escort_beta/rates2.tsv.gz .
+	#mv rates2.tsv.gz data/forGiantOak3/
+	#gunzip -f data/forGiantOak3/rates2.tsv.gz
+#data/forGiantOak3/ismassageparlorad.tsv:
+	## Get massage parlor extraction from the Deep Dive data drop, and extract it
+	#$(GET_FROM_DEEPDIVE_S3) s3://memex-data/escort_beta/ismassageparlorad.tsv.gz
+	#gunzip -f ismassageparlorad.tsv.gz
+	#mv ismassageparlorad.tsv data/forGiantOak3/
+#data/forGiantOak3/msa_locations.tsv: data/forGiantOak3/doc-provider-timestamp.tsv
+	#$(GET_FROM_DEEPDIVE_S3) s3://memex-data/escort_beta/msa_locations_round2.tsv.gz
+	#gunzip msa_locations_round2.tsv.gz
+	#mv msa_locations_round2.tsv data/forGiantOak3/msa_locations.tsv
+#data/forGiantOak6/incall-new.tsv:
+	#$(GET_FROM_DEEPDIVE_S3) s3://memex-data/escort_beta/forGiantOak6.tgz
+	#tar xvf forGiantOak6.tgz -C data/
+	#rm forGiantOak6.tgz
+#data/forGiantOak3/isssexad.tsv:
+	## Get the sex ad flag from deep dive
+	#$(HTTP_GET) http://$(EXPORT_BUCKET).s3.amazonaws.com/sex_ad_analysis/input/isssexad.tsv
+	#mv isssexad.tsv data/forGiantOak3/
 
 ## Publicly available data sources
 cols_17.txt:
@@ -147,21 +147,26 @@ ucr.csv: make_ucr.py ucr_lemas_msa.csv
 acs.csv: make_acs.py acs_2013_msa_gender_wage.csv acs_2015_03_18.csv
 	python make_acs.py
 
-msa_month_characteristics.csv: make_msa_month_characteristics.py ucr.csv month_msa_wage_instruments.csv msa_month_ad_aggregates.csv provider_panel.csv
+msa_month_characteristics.csv: make_msa_month_characteristics.py ucr.csv month_msa_wage_instruments.csv msa_month_ad_aggregates.csv
 	python make_msa_month_characteristics.py
 
 msa_month_ad_aggregates.csv: make_msa_month_ad_aggregates.py ad_price_ad_level.csv 
 	python make_msa_month_ad_aggregates.py
 
-provider_panel.csv: ad_price_ad_level.csv make_provider_panel.py
-	python make_provider_panel.py
+#provider_panel.csv: ad_price_ad_level.csv make_provider_panel.py
+	#python make_provider_panel.py
 
 msa_characteristics.csv: make_msa_characteristics.py acs.csv violence_nibrs.csv female_violence_nibrs.csv prostitution_nibrs.csv ucr.csv lemas.csv ad_price_ad_level.csv
 	python make_msa_characteristics.py
 
-ad_prices_price_level.csv: make_ad_prices.py data/forGiantOak3/msa_locations.tsv data/forGiantOak3/doc-provider-timestamp.tsv data/forGiantOak3/isssexad.tsv data/forGiantOak3/ismassageparlorad.tsv data/forGiantOak6/incall-new.tsv
-
+ad_prices_price_level.csv: make_ad_prices.py data/cdr/rates-text.tsv data/cdr/ismassageparlorad_text.tsv data/cdr/cbsa-text-and-dom-and-url.tsv data/cdr/phone_numbers-text.tsv  data/dates_cdr.tsv  data/cdr/service-text.tsv data/website_cdr.tsv
 	python make_ad_prices.py
+
+data/dates_cdr.tsv: make_dates.py data/cdr/content.tsv
+	python make_dates.py
+
+data/website_cdr.tsv: data/dates_cdr.tsv
+
 ############ End intermediate data targets
 
 ############ Begin final targets
@@ -169,9 +174,11 @@ ad_prices_price_level.csv: make_ad_prices.py data/forGiantOak3/msa_locations.tsv
 cpi_crosssection.csv: make_cpicrosssection.py ad_price_ad_level.csv
 	python make_cpicrosssection.py
 
-local: ad_prices_price_level.csv ad_zero_prices.csv census_2000_msa_industry_gender_wage.csv acs_2013_msa_gender_wage.csv ad_zero_prices.csv acs.csv month_msa_wage_instruments.csv acs.csv prostitution_nibrs.csv female_violence_nibrs.csv violence_nibrs.csv provider_panel.csv msa_month_characteristics.csv msa_characteristics.csv cpi_crosssection.csv ad_price_ad_level_all.csv
+local: ad_prices_price_level.csv ad_zero_prices.csv census_2000_msa_industry_gender_wage.csv acs_2013_msa_gender_wage.csv ad_zero_prices.csv acs.csv month_msa_wage_instruments.csv acs.csv prostitution_nibrs.csv female_violence_nibrs.csv violence_nibrs.csv msa_month_characteristics.csv msa_characteristics.csv cpi_crosssection.csv ad_price_ad_level_all.csv
+#local: ad_prices_price_level.csv ad_zero_prices.csv census_2000_msa_industry_gender_wage.csv acs_2013_msa_gender_wage.csv ad_zero_prices.csv acs.csv month_msa_wage_instruments.csv acs.csv prostitution_nibrs.csv female_violence_nibrs.csv violence_nibrs.csv provider_panel.csv msa_month_characteristics.csv msa_characteristics.csv cpi_crosssection.csv ad_price_ad_level_all.csv
 
-export: ad_prices_price_level.csv ad_zero_prices.csv census_2000_msa_industry_gender_wage.csv acs_2013_msa_gender_wage.csv ad_zero_prices.csv acs.csv month_msa_wage_instruments.csv acs.csv prostitution_nibrs.csv female_violence_nibrs.csv violence_nibrs.csv provider_panel.csv msa_month_characteristics.csv msa_characteristics.csv cpi_crosssection.csv ad_price_ad_level_all.csv
+export: ad_prices_price_level.csv ad_zero_prices.csv census_2000_msa_industry_gender_wage.csv acs_2013_msa_gender_wage.csv ad_zero_prices.csv acs.csv month_msa_wage_instruments.csv acs.csv prostitution_nibrs.csv female_violence_nibrs.csv violence_nibrs.csv msa_month_characteristics.csv msa_characteristics.csv cpi_crosssection.csv ad_price_ad_level_all.csv
+export: ad_prices_price_level.csv ad_zero_prices.csv census_2000_msa_industry_gender_wage.csv acs_2013_msa_gender_wage.csv ad_zero_prices.csv acs.csv month_msa_wage_instruments.csv acs.csv prostitution_nibrs.csv female_violence_nibrs.csv violence_nibrs.csv msa_month_characteristics.csv msa_characteristics.csv cpi_crosssection.csv ad_price_ad_level_all.csv provider_panel.csv
 	$(PUT_TO_GIANTOAK_S3) prostitution_nibrs.csv s3://$(EXPORT_BUCKET)/sex_ad_analysis/intermediate/
 	$(PUT_TO_GIANTOAK_S3) female_violence_nibrs.csv s3://$(EXPORT_BUCKET)/sex_ad_analysis/intermediate/
 	$(PUT_TO_GIANTOAK_S3) violence_nibrs.csv s3://$(EXPORT_BUCKET)/sex_ad_analysis/intermediate/
@@ -196,8 +203,8 @@ export: ad_prices_price_level.csv ad_zero_prices.csv census_2000_msa_industry_ge
 	#$(PUT_TO_GIANTOAK_S3) ad_price_ad_level_all.zip s3://$(EXPORT_BUCKET)/sex_ad_analysis/output/
 	zip ad_price_price_level.zip ad_prices_price_level.csv
 	$(PUT_TO_GIANTOAK_S3) ad_price_ad_level.zip s3://$(EXPORT_BUCKET)/sex_ad_analysis/output/
-	zip provider_panel.zip provider_panel.csv
-	$(PUT_TO_GIANTOAK_S3) provider_panel.zip s3://$(EXPORT_BUCKET)/sex_ad_analysis/output/
+	#zip provider_panel.zip provider_panel.csv
+	#$(PUT_TO_GIANTOAK_S3) provider_panel.zip s3://$(EXPORT_BUCKET)/sex_ad_analysis/output/
 	$(PUT_TO_GIANTOAK_S3) msa_month_characteristics.csv s3://$(EXPORT_BUCKET)/sex_ad_analysis/output/
 	$(PUT_TO_GIANTOAK_S3) msa_characteristics.csv s3://$(EXPORT_BUCKET)/sex_ad_analysis/output/
 	$(PUT_TO_GIANTOAK_S3) cpi_crosssection.csv s3://$(EXPORT_BUCKET)/sex_ad_analysis/output/
@@ -216,7 +223,7 @@ cleanish:
 	rm -fv acs.csv prostitution_nibrs.csv
 	rm -fv female_violence_nibrs.csv
 	rm -fv violence_nibrs.csv
-	rm -fv provider_panel.csv
+	#rm -fv provider_panel.csv
 	rm -fv msa_month_characteristics.csv
 	rm -fv msa_characteristics.csv
 	rm -fv cpi_crosssection.csv

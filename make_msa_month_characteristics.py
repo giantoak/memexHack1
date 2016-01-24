@@ -32,25 +32,25 @@ nibrs = pd.merge(violence_nibrs, female_violence_nibrs)
 nibrs = nibrs.merge(prostitution_nibrs)
 
 # Begin computing MSA-month aggregates of provider-level information
-provider_panel = pd.read_csv('provider_panel.csv')
-# Need to roll some of these statistics up to the msa-month level, if
-# desired... 
-# Micro price is avg_price_per_hour_in_cluster_month. 
-provider_stats =\
-    provider_panel.groupby(['census_msa_code', 'year', 'month'])['avg_price_per_hour_in_cluster_month']\
-    .aggregate({'avg_price_of_active_providers_in_month': np.mean})
-provider_counts_with_price =\
-    provider_panel.groupby(['census_msa_code', 'year', 'month'])['num_ads_in_cluster_month_with_price']\
-    .aggregate({'active_providers_with_price': np.sum})
-provider_counts_total =\
-    provider_panel.groupby(['census_msa_code', 'year', 'month'])['num_ads_in_cluster_month_total']\
-    .aggregate({'active_providers_total': np.sum})
-# active_providers_with_price - is the number of clusters offering with an MSA in a
-# given MSA-month where a price was extracted
-# active_providers_with_total - is the number of clusters offering with an MSA in a
-# given MSA-month with or without a price
-# avg_price_of_active_clusters_in_month - Averaging the price of a
-# provider across providers in a msa-month
+#provider_panel = pd.read_csv('provider_panel.csv')
+## Need to roll some of these statistics up to the msa-month level, if
+## desired... 
+## Micro price is avg_price_per_hour_in_cluster_month. 
+#provider_stats =\
+    #provider_panel.groupby(['census_msa_code', 'year', 'month'])['avg_price_per_hour_in_cluster_month']\
+    #.aggregate({'avg_price_of_active_providers_in_month': np.mean})
+#provider_counts_with_price =\
+    #provider_panel.groupby(['census_msa_code', 'year', 'month'])['num_ads_in_cluster_month_with_price']\
+    #.aggregate({'active_providers_with_price': np.sum})
+#provider_counts_total =\
+    #provider_panel.groupby(['census_msa_code', 'year', 'month'])['num_ads_in_cluster_month_total']\
+    #.aggregate({'active_providers_total': np.sum})
+## active_providers_with_price - is the number of clusters offering with an MSA in a
+## given MSA-month where a price was extracted
+## active_providers_with_total - is the number of clusters offering with an MSA in a
+## given MSA-month with or without a price
+## avg_price_of_active_clusters_in_month - Averaging the price of a
+## provider across providers in a msa-month
 
 # Test code 7/1
 census_names = pd.read_csv('qcew_msa.txt', sep='\t')
@@ -101,8 +101,8 @@ msa_ad_aggregates = msa_ad_aggregates[~msa_ad_aggregates['census_msa_code'].isin
 out = pd.merge(msa_ad_aggregates, ucr, how='outer')
 out = pd.merge(out, nibrs, how='outer')
 out = pd.merge(out, wage_instruments, how='outer')
-out = out.merge(provider_stats, right_index=True, left_on=['census_msa_code', 'year', 'month'], how='outer')
-out = out.merge(provider_counts_with_price, right_index=True, left_on=['census_msa_code', 'year', 'month'], how='outer')
-out = out.merge(provider_counts_total, right_index=True, left_on=['census_msa_code', 'year', 'month'], how='outer')
+#out = out.merge(provider_stats, right_index=True, left_on=['census_msa_code', 'year', 'month'], how='outer')
+#out = out.merge(provider_counts_with_price, right_index=True, left_on=['census_msa_code', 'year', 'month'], how='outer')
+#out = out.merge(provider_counts_total, right_index=True, left_on=['census_msa_code', 'year', 'month'], how='outer')
 out.to_csv('msa_month_characteristics.csv', index=False)
 out = out.merge(census_names)
