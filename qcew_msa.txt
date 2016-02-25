@@ -1,331 +1,815 @@
 qcew_code	msa
+C1002	Abbeville, LA MicroSA
+C1010	Aberdeen, SD MicroSA
+C1014	Aberdeen, WA MicroSA
 C1018	Abilene, TX MSA
+C1022	Ada, OK MicroSA
+C1026	Adjuntas, PR MicroSA
+C1030	Adrian, MI MicroSA
 C1038	Aguadilla-Isabela, PR MSA
 C1042	Akron, OH MSA
+C1046	Alamogordo, NM MicroSA
 C1050	Albany, GA MSA
 C1054	Albany, OR MSA
 C1058	Albany-Schenectady-Troy, NY MSA
+C1062	Albemarle, NC MicroSA
+C1066	Albert Lea, MN MicroSA
+C1070	Albertville, AL MicroSA
 C1074	Albuquerque, NM MSA
+C1076	Alexander City, AL MicroSA
 C1078	Alexandria, LA MSA
+C1082	Alexandria, MN MicroSA
+C1086	Alice, TX MicroSA
+C1088	Allegan, MI MicroSA
 C1090	Allentown-Bethlehem-Easton, PA-NJ MSA
+C1094	Alma, MI MicroSA
+C1098	Alpena, MI MicroSA
 C1102	Altoona, PA MSA
+C1106	Altus, OK MicroSA
 C1110	Amarillo, TX MSA
+C1114	Americus, GA MicroSA
 C1118	Ames, IA MSA
+C1122	Amsterdam, NY MicroSA
 C1126	Anchorage, AK MSA
 C1130	Anderson, IN MSA
 C1134	Anderson, SC MSA
+C1138	Andrews, TX MicroSA
+C1142	Angola, IN MicroSA
 C1146	Ann Arbor, MI MSA
 C1150	Anniston-Oxford-Jacksonville, AL MSA
 C1154	Appleton, WI MSA
+C1158	Arcadia, FL MicroSA
+C1162	Ardmore, OK MicroSA
 C1164	Arecibo, PR MSA
+C1166	Arkadelphia, AR MicroSA
+C1168	Arkansas City-Winfield, KS MicroSA
 C1170	Asheville, NC MSA
+C1174	Ashland, OH MicroSA
+C1178	Ashtabula, OH MicroSA
+C1182	Astoria, OR MicroSA
+C1186	Atchison, KS MicroSA
+C1190	Athens, OH MicroSA
+C1194	Athens, TN MicroSA
+C1198	Athens, TX MicroSA
 C1202	Athens-Clarke County, GA MSA
 C1206	Atlanta-Sandy Springs-Roswell, GA MSA
 C1210	Atlantic City-Hammonton, NJ MSA
+C1214	Auburn, IN MicroSA
+C1218	Auburn, NY MicroSA
 C1222	Auburn-Opelika, AL MSA
 C1226	Augusta-Richmond County, GA-SC MSA
+C1230	Augusta-Waterville, ME MicroSA
+C1238	Austin, MN MicroSA
 C1242	Austin-Round Rock, TX MSA
+C1246	Bainbridge, GA MicroSA
 C1254	Bakersfield, CA MSA
 C1258	Baltimore-Columbia-Towson, MD MSA
 C1262	Bangor, ME MSA
+C1266	Baraboo, WI MicroSA
+C1268	Bardstown, KY MicroSA
 C1270	Barnstable Town, MA MSA
+C1274	Barre, VT MicroSA
+C1278	Bartlesville, OK MicroSA
+C1282	Bastrop, LA MicroSA
+C1286	Batavia, NY MicroSA
+C1290	Batesville, AR MicroSA
 C1294	Baton Rouge, LA MSA
 C1298	Battle Creek, MI MSA
 C1302	Bay City, MI MSA
+C1306	Bay City, TX MicroSA
+C1310	Beatrice, NE MicroSA
 C1314	Beaumont-Port Arthur, TX MSA
+C1318	Beaver Dam, WI MicroSA
 C1322	Beckley, WV MSA
+C1326	Bedford, IN MicroSA
+C1330	Beeville, TX MicroSA
+C1334	Bellefontaine, OH MicroSA
 C1338	Bellingham, WA MSA
+C1342	Bemidji, MN MicroSA
 C1346	Bend-Redmond, OR MSA
+C1350	Bennettsville, SC MicroSA
+C1354	Bennington, VT MicroSA
+C1362	Berlin, NH-VT MicroSA
+C1366	Big Rapids, MI MicroSA
+C1370	Big Spring, TX MicroSA
+C1372	Big Stone Gap, VA MicroSA
 C1374	Billings, MT MSA
 C1378	Binghamton, NY MSA
 C1382	Birmingham-Hoover, AL MSA
+C1386	Bishop, CA MicroSA
 C1390	Bismarck, ND MSA
+C1394	Blackfoot, ID MicroSA
 C1398	Blacksburg-Christiansburg-Radford, VA MSA
 C1401	Bloomington, IL MSA
 C1402	Bloomington, IN MSA
 C1406	Bloomington-Normal, IL MSA
 C1410	Bloomsburg-Berwick, PA MSA
+C1414	Bluefield, WV-VA MicroSA
+C1418	Blytheville, AR MicroSA
+C1422	Bogalusa, LA MicroSA
 C1426	Boise City, ID MSA
+C1434	Boone, IA MicroSA
+C1438	Boone, NC MicroSA
+C1442	Borger, TX MicroSA
 C1446	Boston-Cambridge-Newton, MA-NH MSA
 C1450	Boulder, CO MSA
 C1454	Bowling Green, KY MSA
+C1458	Bozeman, MT MicroSA
+C1462	Bradford, PA MicroSA
+C1466	Brainerd, MN MicroSA
+C1470	Branson, MO MicroSA
+C1472	Breckenridge, CO MicroSA
 C1474	Bremerton-Silverdale, WA MSA
+C1478	Brenham, TX MicroSA
+C1482	Brevard, NC MicroSA
 C1486	Bridgeport-Stamford-Norwalk, CT MSA
+C1494	Brigham City, UT MicroSA
 C1498	Bristol, VA MSA
+C1502	Brookhaven, MS MicroSA
+C1506	Brookings, OR MicroSA
+C1510	Brookings, SD MicroSA
+C1514	Brownsville, TN MicroSA
 C1518	Brownsville-Harlingen, TX MSA
+C1522	Brownwood, TX MicroSA
 C1526	Brunswick, GA MSA
+C1534	Bucyrus, OH MicroSA
 C1538	Buffalo-Cheektowaga-Niagara Falls, NY MSA
+C1542	Burley, ID MicroSA
+C1546	Burlington, IA-IL MicroSA
 C1550	Burlington, NC MSA
 C1554	Burlington-South Burlington, VT MSA
+C1558	Butte-Silver Bow, MT MicroSA
+C1562	Cadillac, MI MicroSA
+C1566	Calhoun, GA MicroSA
 C1568	California-Lexington Park, MD MSA
+C1570	Cambridge, MD MicroSA
+C1574	Cambridge, OH MicroSA
+C1578	Camden, AR MicroSA
+C1582	Campbellsville, KY MicroSA
+C1586	Canon City, CO MicroSA
+C1590	Canton, IL MicroSA
 C1594	Canton-Massillon, OH MSA
 C1598	Cape Coral-Fort Myers, FL MSA
 C1602	Cape Girardeau, MO-IL MSA
 C1606	Carbondale-Marion, IL MSA
+C1610	Carlsbad-Artesia, NM MicroSA
 C1618	Carson City, NV MSA
 C1622	Casper, WY MSA
+C1626	Cedar City, UT MicroSA
 C1630	Cedar Rapids, IA MSA
+C1634	Cedartown, GA MicroSA
+C1638	Celina, OH MicroSA
+C1642	Central City, KY MicroSA
+C1646	Centralia, IL MicroSA
+C1650	Centralia, WA MicroSA
 C1654	Chambersburg-Waynesboro, PA MSA
 C1658	Champaign-Urbana, IL MSA
 C1662	Charleston, WV MSA
+C1666	Charleston-Mattoon, IL MicroSA
 C1670	Charleston-North Charleston, SC MSA
 C1674	Charlotte-Concord-Gastonia, NC-SC MSA
 C1682	Charlottesville, VA MSA
 C1686	Chattanooga, TN-GA MSA
+C1690	Chester, SC MicroSA
 C1694	Cheyenne, WY MSA
 C1698	Chicago-Naperville-Elgin, IL-IN-WI MSA
 C1702	Chico, CA MSA
+C1706	Chillicothe, OH MicroSA
 C1714	Cincinnati, OH-KY-IN MSA
+C1718	City of The Dalles, OR MicroSA
+C1720	Claremont-Lebanon, NH-VT MicroSA
+C1722	Clarksburg, WV MicroSA
+C1726	Clarksdale, MS MicroSA
 C1730	Clarksville, TN-KY MSA
+C1734	Clearlake, CA MicroSA
+C1738	Cleveland, MS MicroSA
 C1742	Cleveland, TN MSA
 C1746	Cleveland-Elyria, OH MSA
+C1750	Clewiston, FL MicroSA
+C1754	Clinton, IA MicroSA
+C1758	Clovis, NM MicroSA
+C1762	Coamo, PR MicroSA
+C1764	Coco, PR MicroSA
 C1766	Coeur d'Alene, ID MSA
+C1770	Coffeyville, KS MicroSA
+C1774	Coldwater, MI MicroSA
 C1778	College Station-Bryan, TX MSA
 C1782	Colorado Springs, CO MSA
 C1786	Columbia, MO MSA
 C1790	Columbia, SC MSA
+C1794	Columbia, TN MicroSA
 C1798	Columbus, GA-AL MSA
 C1802	Columbus, IN MSA
+C1806	Columbus, MS MicroSA
+C1810	Columbus, NE MicroSA
 C1814	Columbus, OH MSA
+C1818	Concord, NH MicroSA
+C1822	Connersville, IN MicroSA
+C1826	Cookeville, TN MicroSA
+C1830	Coos Bay, OR MicroSA
+C1834	Corbin, KY MicroSA
+C1838	Cordele, GA MicroSA
+C1842	Corinth, MS MicroSA
+C1846	Cornelia, GA MicroSA
+C1850	Corning, NY MicroSA
 C1858	Corpus Christi, TX MSA
+C1862	Corsicana, TX MicroSA
+C1866	Cortland, NY MicroSA
 C1870	Corvallis, OR MSA
+C1874	Coshocton, OH MicroSA
+C1878	Craig, CO MicroSA
+C1882	Crawfordsville, IN MicroSA
+C1886	Crescent City, CA MicroSA
 C1888	Crestview-Fort Walton Beach-Destin, FL MSA
+C1890	Crossville, TN MicroSA
+C1894	Crowley, LA MicroSA
+C1898	Cullman, AL MicroSA
+C1900	Cullowhee, NC MicroSA
 C1906	Cumberland, MD-WV MSA
 C1910	Dallas-Fort Worth-Arlington, TX MSA
 C1914	Dalton, GA MSA
 C1918	Danville, IL MSA
+C1922	Danville, KY MicroSA
+C1926	Danville, VA MicroSA
 C1930	Daphne-Fairhope-Foley, AL MSA
 C1934	Davenport-Moline-Rock Island, IA-IL MSA
 C1938	Dayton, OH MSA
+C1942	Dayton, TN MicroSA
 C1946	Decatur, AL MSA
 C1950	Decatur, IL MSA
+C1954	Decatur, IN MicroSA
+C1958	Defiance, OH MicroSA
+C1962	Del Rio, TX MicroSA
 C1966	Deltona-Daytona Beach-Ormond Beach, FL MSA
+C1970	Deming, NM MicroSA
 C1974	Denver-Aurora-Lakewood, CO MSA
+C1976	DeRidder, LA MicroSA
 C1978	Des Moines-West Des Moines, IA MSA
 C1982	Detroit-Warren-Dearborn, MI MSA
+C1986	Dickinson, ND MicroSA
+C1990	Dillon, SC MicroSA
+C1994	Dixon, IL MicroSA
+C1998	Dodge City, KS MicroSA
 C2002	Dothan, AL MSA
+C2006	Douglas, GA MicroSA
 C2010	Dover, DE MSA
+C2014	Dublin, GA MicroSA
+C2018	DuBois, PA MicroSA
 C2022	Dubuque, IA MSA
 C2026	Duluth, MN-WI MSA
+C2030	Dumas, TX MicroSA
+C2034	Duncan, OK MicroSA
+C2038	Dunn, NC MicroSA
+C2042	Durango, CO MicroSA
+C2046	Durant, OK MicroSA
 C2050	Durham-Chapel Hill, NC MSA
+C2054	Dyersburg, TN MicroSA
+C2058	Eagle Pass, TX MicroSA
+C2062	East Liverpool-Salem, OH MicroSA
+C2066	Easton, MD MicroSA
 C2070	East Stroudsburg, PA MSA
 C2074	Eau Claire, WI MSA
+C2078	Edwards, CO MicroSA
+C2082	Effingham, IL MicroSA
+C2090	El Campo, TX MicroSA
 C2094	El Centro, CA MSA
+C2098	El Dorado, AR MicroSA
+C2102	Elizabeth City, NC MicroSA
 C2106	Elizabethtown-Fort Knox, KY MSA
+C2112	Elk City, OK MicroSA
 C2114	Elkhart-Goshen, IN MSA
+C2118	Elkins, WV MicroSA
+C2122	Elko, NV MicroSA
+C2126	Ellensburg, WA MicroSA
 C2130	Elmira, NY MSA
 C2134	El Paso, TX MSA
+C2138	Emporia, KS MicroSA
+C2142	Enid, OK MicroSA
+C2146	Enterprise, AL MicroSA
 C2150	Erie, PA MSA
+C2154	Escanaba, MI MicroSA
+C2158	Espanola, NM MicroSA
+C2164	Eufaula, AL-GA MicroSA
 C2166	Eugene, OR MSA
+C2170	Eureka-Arcata-Fortuna, CA MicroSA
+C2174	Evanston, WY MicroSA
 C2178	Evansville, IN-KY MSA
 C2182	Fairbanks, AK MSA
+C2184	Fairfield, IA MicroSA
+C2186	Fairmont, MN MicroSA
+C2190	Fairmont, WV MicroSA
 C2194	Fajardo, PR MSA
+C2198	Fallon, NV MicroSA
 C2202	Fargo, ND-MN MSA
+C2206	Faribault-Northfield, MN MicroSA
+C2210	Farmington, MO MicroSA
 C2214	Farmington, NM MSA
 C2218	Fayetteville, NC MSA
 C2222	Fayetteville-Springdale-Rogers, AR-MO MSA
+C2226	Fergus Falls, MN MicroSA
+C2228	Fernley, NV MicroSA
+C2230	Findlay, OH MicroSA
+C2234	Fitzgerald, GA MicroSA
 C2238	Flagstaff, AZ MSA
 C2242	Flint, MI MSA
 C2246	Florence, AL MSA
 C2250	Florence, SC MSA
 C2252	Florence-Muscle Shoals, AL MSA
 C2254	Fond du Lac, WI MSA
+C2258	Forest City, NC MicroSA
+C2262	Forrest City, AR MicroSA
 C2266	Fort Collins, CO MSA
+C2270	Fort Dodge, IA MicroSA
+C2278	Fort Leonard Wood, MO MicroSA
+C2280	Fort Madison-Keokuk, IA-IL-MO MicroSA
+C2282	Fort Morgan, CO MicroSA
+C2284	Fort Payne, AL MicroSA
+C2286	Fort Polk South, LA MicroSA
 C2290	Fort Smith, AR-OK MSA
+C2298	Fort Valley, GA MicroSA
 C2302	Fort Walton Beach-Crestview-Destin, FL MSA
 C2306	Fort Wayne, IN MSA
+C2314	Frankfort, IN MicroSA
+C2318	Frankfort, KY MicroSA
+C2324	Fredericksburg, TX MicroSA
+C2330	Freeport, IL MicroSA
+C2334	Fremont, NE MicroSA
+C2338	Fremont, OH MicroSA
 C2342	Fresno, CA MSA
 C2346	Gadsden, AL MSA
+C2350	Gaffney, SC MicroSA
 C2354	Gainesville, FL MSA
 C2358	Gainesville, GA MSA
+C2362	Gainesville, TX MicroSA
+C2366	Galesburg, IL MicroSA
+C2370	Gallup, NM MicroSA
+C2378	Garden City, KS MicroSA
+C2382	Gardnerville Ranchos, NV MicroSA
+C2386	Georgetown, SC MicroSA
 C2390	Gettysburg, PA MSA
+C2394	Gillette, WY MicroSA
+C2398	Glasgow, KY MicroSA
 C2402	Glens Falls, NY MSA
+C2406	Glenwood Springs, CO MicroSA
+C2410	Gloversville, NY MicroSA
 C2414	Goldsboro, NC MSA
+C2418	Granbury, TX MicroSA
 C2422	Grand Forks, ND-MN MSA
 C2426	Grand Island, NE MSA
 C2430	Grand Junction, CO MSA
 C2434	Grand Rapids-Wyoming, MI MSA
+C2438	Grants, NM MicroSA
 C2442	Grants Pass, OR MSA
+C2446	Great Bend, KS MicroSA
 C2450	Great Falls, MT MSA
 C2454	Greeley, CO MSA
 C2458	Green Bay, WI MSA
+C2462	Greeneville, TN MicroSA
+C2464	Greenfield Town, MA MicroSA
 C2466	Greensboro-High Point, NC MSA
+C2470	Greensburg, IN MicroSA
+C2474	Greenville, MS MicroSA
 C2478	Greenville, NC MSA
+C2482	Greenville, OH MicroSA
 C2486	Greenville-Anderson-Mauldin, SC MSA
+C2490	Greenwood, MS MicroSA
+C2494	Greenwood, SC MicroSA
+C2498	Grenada, MS MicroSA
 C2502	Guayama, PR MSA
 C2506	Gulfport-Biloxi-Pascagoula, MS MSA
+C2510	Guymon, OK MicroSA
 C2518	Hagerstown-Martinsburg, MD-WV MSA
+C2520	Hailey, ID MicroSA
 C2522	Hammond, LA MSA
 C2526	Hanford-Corcoran, CA MSA
+C2530	Hannibal, MO MicroSA
+C2534	Harriman, TN MicroSA
+C2538	Harrisburg, IL MicroSA
 C2542	Harrisburg-Carlisle, PA MSA
+C2546	Harrison, AR MicroSA
 C2550	Harrisonburg, VA MSA
 C2554	Hartford-West Hartford-East Hartford, CT MSA
+C2558	Hastings, NE MicroSA
 C2562	Hattiesburg, MS MSA
+C2566	Havre, MT MicroSA
+C2570	Hays, KS MicroSA
+C2572	Heber, UT MicroSA
+C2574	Helena, MT MicroSA
+C2576	Helena-West Helena, AR MicroSA
+C2578	Henderson, NC MicroSA
+C2582	Hereford, TX MicroSA
+C2584	Hermiston-Pendleton, OR MicroSA
 C2586	Hickory-Lenoir-Morganton, NC MSA
+C2588	Hillsdale, MI MicroSA
+C2590	Hilo, HI MicroSA
 C2594	Hilton Head Island-Bluffton-Beaufort, SC MSA
 C2598	Hinesville, GA MSA
+C2602	Hobbs, NM MicroSA
+C2609	Holland, MI MicroSA
 C2610	Holland-Grand Haven, MI MSA
 C2614	Homosassa Springs, FL MSA
 C2618	Honolulu, HI MSA
+C2622	Hood River, OR MicroSA
+C2626	Hope, AR MicroSA
 C2630	Hot Springs, AR MSA
+C2634	Houghton, MI MicroSA
 C2638	Houma-Thibodaux, LA MSA
 C2642	Houston-The Woodlands-Sugar Land, TX MSA
+C2646	Hudson, NY MicroSA
+C2648	Humboldt, TN MicroSA
+C2650	Huntingdon, PA MicroSA
+C2654	Huntington, IN MicroSA
 C2658	Huntington-Ashland, WV-KY-OH MSA
 C2662	Huntsville, AL MSA
+C2666	Huntsville, TX MicroSA
+C2670	Huron, SD MicroSA
+C2674	Hutchinson, KS MicroSA
+C2678	Hutchinson, MN MicroSA
 C2682	Idaho Falls, ID MSA
+C2686	Indiana, PA MicroSA
 C2690	Indianapolis-Carmel-Anderson, IN MSA
+C2694	Indianola, MS MicroSA
+C2696	Ionia, MI MicroSA
 C2698	Iowa City, IA MSA
+C2702	Iron Mountain, MI-WI MicroSA
 C2706	Ithaca, NY MSA
 C2710	Jackson, MI MSA
 C2714	Jackson, MS MSA
+C2716	Jackson, OH MicroSA
 C2718	Jackson, TN MSA
+C2722	Jackson, WY-ID MicroSA
 C2726	Jacksonville, FL MSA
+C2730	Jacksonville, IL MicroSA
 C2734	Jacksonville, NC MSA
+C2738	Jacksonville, TX MicroSA
+C2742	Jamestown, ND MicroSA
+C2746	Jamestown-Dunkirk-Fredonia, NY MicroSA
 C2750	Janesville-Beloit, WI MSA
+C2754	Jasper, IN MicroSA
+C2758	Jayuya, PR MicroSA
+C2760	Jefferson, GA MicroSA
 C2762	Jefferson City, MO MSA
+C2766	Jennings, LA MicroSA
+C2770	Jesup, GA MicroSA
 C2774	Johnson City, TN MSA
 C2778	Johnstown, PA MSA
 C2786	Jonesboro, AR MSA
 C2790	Joplin, MO MSA
+C2792	Junction City, KS MicroSA
+C2794	Juneau, AK MicroSA
 C2798	Kahului-Wailuku-Lahaina, HI MSA
 C2802	Kalamazoo-Portage, MI MSA
+C2806	Kalispell, MT MicroSA
 C2810	Kankakee, IL MSA
 C2814	Kansas City, MO-KS MSA
+C2818	Kapaa, HI MicroSA
+C2826	Kearney, NE MicroSA
+C2830	Keene, NH MicroSA
+C2834	Kendallville, IN MicroSA
+C2838	Kennett, MO MicroSA
 C2842	Kennewick-Richland, WA MSA
+C2846	Keokuk-Fort Madison, IA-MO MicroSA
+C2850	Kerrville, TX MicroSA
+C2854	Ketchikan, AK MicroSA
+C2858	Key West, FL MicroSA
+C2862	Kill Devil Hills, NC MicroSA
 C2866	Killeen-Temple, TX MSA
 C2870	Kingsport-Bristol-Bristol, TN-VA MSA
 C2874	Kingston, NY MSA
+C2878	Kingsville, TX MicroSA
+C2882	Kinston, NC MicroSA
+C2886	Kirksville, MO MicroSA
+C2890	Klamath Falls, OR MicroSA
 C2894	Knoxville, TN MSA
+C2898	Kodiak, AK MicroSA
 C2902	Kokomo, IN MSA
+C2906	Laconia, NH MicroSA
 C2910	La Crosse-Onalaska, WI-MN MSA
 C2914	Lafayette, IN MSA
 C2918	Lafayette, LA MSA
 C2920	Lafayette-West Lafayette, IN MSA
+C2922	La Follette, TN MicroSA
+C2926	La Grande, OR MicroSA
+C2930	LaGrange, GA MicroSA
 C2934	Lake Charles, LA MSA
+C2938	Lake City, FL MicroSA
 C2942	Lake Havasu City-Kingman, AZ MSA
 C2946	Lakeland-Winter Haven, FL MSA
+C2950	Lamesa, TX MicroSA
 C2954	Lancaster, PA MSA
+C2958	Lancaster, SC MicroSA
 C2962	Lansing-East Lansing, MI MSA
+C2966	Laramie, WY MicroSA
 C2970	Laredo, TX MSA
 C2974	Las Cruces, NM MSA
+C2978	Las Vegas, NM MicroSA
 C2982	Las Vegas-Henderson-Paradise, NV MSA
+C2986	Laurel, MS MicroSA
+C2990	Laurinburg, NC MicroSA
 C2994	Lawrence, KS MSA
+C2998	Lawrenceburg, TN MicroSA
 C3002	Lawton, OK MSA
+C3006	Lebanon, MO MicroSA
+C3010	Lebanon, NH-VT MicroSA
 C3014	Lebanon, PA MSA
+C3022	Levelland, TX MicroSA
+C3026	Lewisburg, PA MicroSA
+C3028	Lewisburg, TN MicroSA
 C3030	Lewiston, ID-WA MSA
 C3034	Lewiston-Auburn, ME MSA
+C3038	Lewistown, PA MicroSA
+C3042	Lexington, NE MicroSA
 C3046	Lexington-Fayette, KY MSA
+C3050	Lexington Park, MD MicroSA
+C3054	Lexington-Thomasville, NC MicroSA
+C3058	Liberal, KS MicroSA
 C3062	Lima, OH MSA
+C3066	Lincoln, IL MicroSA
 C3070	Lincoln, NE MSA
+C3074	Lincolnton, NC MicroSA
 C3078	Little Rock-North Little Rock-Conway, AR MSA
+C3082	Lock Haven, PA MicroSA
 C3086	Logan, UT-ID MSA
+C3088	Logan, WV MicroSA
+C3090	Logansport, IN MicroSA
+C3094	London, KY MicroSA
 C3098	Longview, TX MSA
 C3102	Longview, WA MSA
+C3106	Los Alamos, NM MicroSA
 C3108	Los Angeles-Long Beach-Anaheim, CA MSA
 C3110	Los Angeles-Long Beach-Santa Ana, CA MSA
 C3114	Louisville-Jefferson County, KY-IN MSA
 C3118	Lubbock, TX MSA
+C3122	Ludington, MI MicroSA
+C3126	Lufkin, TX MicroSA
+C3130	Lumberton, NC MicroSA
 C3134	Lynchburg, VA MSA
+C3138	Macomb, IL MicroSA
 C3142	Macon, GA MSA
 C3146	Madera, CA MSA
+C3150	Madison, IN MicroSA
 C3154	Madison, WI MSA
+C3158	Madisonville, KY MicroSA
+C3162	Magnolia, AR MicroSA
+C3166	Malone, NY MicroSA
+C3168	Malvern, AR MicroSA
 C3170	Manchester-Nashua, NH MSA
 C3174	Manhattan, KS MSA
+C3182	Manitowoc, WI MicroSA
 C3186	Mankato-North Mankato, MN MSA
 C3190	Mansfield, OH MSA
+C3193	Marietta, OH MicroSA
+C3194	Marinette, WI-MI MicroSA
+C3198	Marion, IN MicroSA
+C3200	Marion, NC MicroSA
+C3202	Marion, OH MicroSA
+C3206	Marion-Herrin, IL MicroSA
+C3210	Marquette, MI MicroSA
+C3214	Marshall, MN MicroSA
+C3218	Marshall, MO MicroSA
+C3222	Marshall, TX MicroSA
+C3226	Marshalltown, IA MicroSA
+C3228	Martin, TN MicroSA
+C3230	Martinsville, VA MicroSA
+C3234	Maryville, MO MicroSA
+C3238	Mason City, IA MicroSA
 C3242	Mayaguez, PR MSA
+C3246	Mayfield, KY MicroSA
+C3250	Maysville, KY MicroSA
+C3254	McAlester, OK MicroSA
 C3258	McAllen-Edinburg-Mission, TX MSA
+C3262	McComb, MS MicroSA
+C3266	McMinnville, TN MicroSA
+C3270	McPherson, KS MicroSA
+C3274	Meadville, PA MicroSA
 C3278	Medford, OR MSA
 C3282	Memphis, TN-MS-AR MSA
+C3286	Menomonie, WI MicroSA
 C3290	Merced, CA MSA
+C3294	Meridian, MS MicroSA
+C3298	Merrill, WI MicroSA
+C3302	Mexico, MO MicroSA
+C3306	Miami, OK MicroSA
 C3310	Miami-Fort Lauderdale-West Palm Beach, FL MSA
 C3314	Michigan City-La Porte, IN MSA
+C3318	Middlesborough, KY MicroSA
 C3322	Midland, MI MSA
 C3326	Midland, TX MSA
+C3330	Milledgeville, GA MicroSA
 C3334	Milwaukee-Waukesha-West Allis, WI MSA
+C3338	Minden, LA MicroSA
+C3342	Mineral Wells, TX MicroSA
 C3346	Minneapolis-St. Paul-Bloomington, MN-WI MSA
+C3350	Minot, ND MicroSA
 C3354	Missoula, MT MSA
+C3358	Mitchell, SD MicroSA
+C3362	Moberly, MO MicroSA
 C3366	Mobile, AL MSA
 C3370	Modesto, CA MSA
 C3374	Monroe, LA MSA
 C3378	Monroe, MI MSA
+C3382	Monroe, WI MicroSA
 C3386	Montgomery, AL MSA
+C3394	Montrose, CO MicroSA
+C3398	Morehead City, NC MicroSA
+C3402	Morgan City, LA MicroSA
 C3406	Morgantown, WV MSA
 C3410	Morristown, TN MSA
+C3414	Moscow, ID MicroSA
+C3418	Moses Lake, WA MicroSA
+C3422	Moultrie, GA MicroSA
+C3426	Mountain Home, AR MicroSA
+C3430	Mountain Home, ID MicroSA
+C3434	Mount Airy, NC MicroSA
+C3438	Mount Pleasant, MI MicroSA
+C3442	Mount Pleasant, TX MicroSA
+C3446	Mount Sterling, KY MicroSA
+C3450	Mount Vernon, IL MicroSA
+C3454	Mount Vernon, OH MicroSA
 C3458	Mount Vernon-Anacortes, WA MSA
 C3462	Muncie, IN MSA
+C3466	Murray, KY MicroSA
+C3470	Muscatine, IA MicroSA
 C3474	Muskegon, MI MSA
+C3478	Muskogee, OK MicroSA
 C3482	Myrtle Beach-Conway-North Myrtle Beach, SC-NC MSA
+C3486	Nacogdoches, TX MicroSA
 C3490	Napa, CA MSA
 C3494	Naples-Immokalee-Marco Island, FL MSA
 C3498	Nashville-Davidson--Murfreesboro--Franklin, TN MSA
+C3502	Natchez, MS-LA MicroSA
+C3506	Natchitoches, LA MicroSA
 C3510	New Bern, NC MSA
+C3514	Newberry, SC MicroSA
+C3522	New Castle, IN MicroSA
+C3526	New Castle, PA MicroSA
 C3530	New Haven-Milford, CT MSA
+C3534	New Iberia, LA MicroSA
 C3538	New Orleans-Metairie, LA MSA
+C3542	New Philadelphia-Dover, OH MicroSA
+C3544	Newport, OR MicroSA
+C3546	Newport, TN MicroSA
+C3550	Newton, IA MicroSA
+C3558	New Ulm, MN MicroSA
 C3562	New York-Newark-Jersey City, NY-NJ-PA MSA
 C3566	Niles-Benton Harbor, MI MSA
+C3570	Nogales, AZ MicroSA
+C3574	Norfolk, NE MicroSA
+C3582	North Platte, NE MicroSA
 C3584	North Port-Sarasota-Bradenton, FL MSA
+C3586	North Vernon, IN MicroSA
+C3590	North Wilkesboro, NC MicroSA
+C3594	Norwalk, OH MicroSA
 C3598	Norwich-New London, CT MSA
+C3602	Oak Harbor, WA MicroSA
+C3606	Oak Hill, WV MicroSA
 C3610	Ocala, FL MSA
 C3614	Ocean City, NJ MSA
+C3618	Ocean Pines, MD MicroSA
 C3622	Odessa, TX MSA
 C3626	Ogden-Clearfield, UT MSA
+C3630	Ogdensburg-Massena, NY MicroSA
+C3634	Oil City, PA MicroSA
+C3638	Okeechobee, FL MicroSA
 C3642	Oklahoma City, OK MSA
+C3646	Olean, NY MicroSA
 C3650	Olympia-Tumwater, WA MSA
 C3654	Omaha-Council Bluffs, NE-IA MSA
+C3658	Oneonta, NY MicroSA
+C3662	Ontario, OR-ID MicroSA
+C3666	Opelousas, LA MicroSA
+C3670	Orangeburg, SC MicroSA
 C3674	Orlando-Kissimmee-Sanford, FL MSA
 C3678	Oshkosh-Neenah, WI MSA
+C3682	Oskaloosa, IA MicroSA
+C3683	Othello, WA MicroSA
+C3684	Ottawa, KS MicroSA
+C3686	Ottawa-Peru, IL MicroSA
+C3690	Ottumwa, IA MicroSA
+C3694	Owatonna, MN MicroSA
 C3698	Owensboro, KY MSA
+C3702	Owosso, MI MicroSA
+C3706	Oxford, MS MicroSA
+C3708	Oxford, NC MicroSA
 C3710	Oxnard-Thousand Oaks-Ventura, CA MSA
+C3712	Ozark, AL MicroSA
+C3714	Paducah, KY-IL MicroSA
+C3722	Pahrump, NV MicroSA
+C3726	Palatka, FL MicroSA
+C3730	Palestine, TX MicroSA
 C3734	Palm Bay-Melbourne-Titusville, FL MSA
+C3738	Palm Coast, FL MicroSA
+C3742	Pampa, TX MicroSA
 C3746	Panama City, FL MSA
+C3750	Paragould, AR MicroSA
+C3754	Paris, TN MicroSA
+C3758	Paris, TX MicroSA
 C3762	Parkersburg-Vienna, WV MSA
+C3766	Parsons, KS MicroSA
 C3770	Pascagoula, MS MSA
+C3774	Payson, AZ MicroSA
+C3778	Pecos, TX MicroSA
+C3780	Pella, IA MicroSA
+C3782	Pendleton-Hermiston, OR MicroSA
 C3786	Pensacola-Ferry Pass-Brent, FL MSA
 C3790	Peoria, IL MSA
+C3794	Peru, IN MicroSA
 C3798	Philadelphia-Camden-Wilmington, PA-NJ-DE-MD MSA
+C3802	Phoenix Lake-Cedar Ridge, CA MicroSA
 C3806	Phoenix-Mesa-Scottsdale, AZ MSA
+C3810	Picayune, MS MicroSA
+C3818	Pierre, SD MicroSA
+C3820	Pierre Part, LA MicroSA
 C3822	Pine Bluff, AR MSA
+C3824	Pinehurst-Southern Pines, NC MicroSA
+C3826	Pittsburg, KS MicroSA
 C3830	Pittsburgh, PA MSA
 C3834	Pittsfield, MA MSA
+C3838	Plainview, TX MicroSA
+C3842	Platteville, WI MicroSA
+C3846	Plattsburgh, NY MicroSA
+C3850	Plymouth, IN MicroSA
 C3854	Pocatello, ID MSA
+C3858	Point Pleasant, WV-OH MicroSA
+C3862	Ponca City, OK MicroSA
 C3866	Ponce, PR MSA
+C3870	Pontiac, IL MicroSA
+C3874	Poplar Bluff, MO MicroSA
+C3878	Portales, NM MicroSA
+C3882	Port Angeles, WA MicroSA
+C3884	Port Clinton, OH MicroSA
 C3886	Portland-South Portland, ME MSA
 C3890	Portland-Vancouver-Hillsboro, OR-WA MSA
+C3892	Port Lavaca, TX MicroSA
 C3894	Port St. Lucie, FL MSA
+C3902	Portsmouth, OH MicroSA
+C3906	Pottsville, PA MicroSA
 C3910	Poughkeepsie-Newburgh-Middletown, NY MSA
 C3914	Prescott, AZ MSA
+C3922	Price, UT MicroSA
+C3926	Prineville, OR MicroSA
 C3930	Providence-Warwick, RI-MA MSA
 C3934	Provo-Orem, UT MSA
 C3938	Pueblo, CO MSA
+C3942	Pullman, WA MicroSA
 C3946	Punta Gorda, FL MSA
+C3950	Quincy, IL-MO MicroSA
 C3954	Racine, WI MSA
 C3958	Raleigh, NC MSA
 C3966	Rapid City, SD MSA
+C3970	Raymondville, TX MicroSA
 C3974	Reading, PA MSA
+C3978	Red Bluff, CA MicroSA
 C3982	Redding, CA MSA
+C3986	Red Wing, MN MicroSA
 C3990	Reno, NV MSA
+C3994	Rexburg, ID MicroSA
+C3998	Richmond, IN MicroSA
+C4002	Richmond, KY MicroSA
 C4006	Richmond, VA MSA
+C4008	Richmond-Berea, KY MicroSA
+C4010	Rio Grande City, TX MicroSA
 C4014	Riverside-San Bernardino-Ontario, CA MSA
+C4018	Riverton, WY MicroSA
 C4022	Roanoke, VA MSA
+C4026	Roanoke Rapids, NC MicroSA
+C4030	Rochelle, IL MicroSA
 C4034	Rochester, MN MSA
 C4038	Rochester, NY MSA
 C4042	Rockford, IL MSA
+C4046	Rockingham, NC MicroSA
+C4050	Rockland, ME MicroSA
+C4054	Rock Springs, WY MicroSA
 C4058	Rocky Mount, NC MSA
+C4062	Rolla, MO MicroSA
 C4066	Rome, GA MSA
+C4070	Roseburg, OR MicroSA
+C4074	Roswell, NM MicroSA
+C4078	Russellville, AR MicroSA
+C4082	Ruston, LA MicroSA
+C4086	Rutland, VT MicroSA
 C4090	Sacramento--Roseville--Arden-Arcade, CA MSA
+C4094	Safford, AZ MicroSA
 C4098	Saginaw, MI MSA
 C4106	St. Cloud, MN MSA
 C4110	St. George, UT MSA
 C4114	St. Joseph, MO-KS MSA
 C4118	St. Louis, MO-IL MSA
+C4122	St. Marys, GA MicroSA
+C4126	St. Marys, PA MicroSA
+C4140	Salem, OH MicroSA
 C4142	Salem, OR MSA
+C4146	Salina, KS MicroSA
 C4150	Salinas, CA MSA
 C4154	Salisbury, MD-DE MSA
+C4158	Salisbury, NC MicroSA
 C4162	Salt Lake City, UT MSA
 C4166	San Angelo, TX MSA
 C4170	San Antonio-New Braunfels, TX MSA
 C4174	San Diego-Carlsbad, CA MSA
+C4176	Sandpoint, ID MicroSA
+C4178	Sandusky, OH MicroSA
+C4182	Sanford, NC MicroSA
 C4186	San Francisco-Oakland-Hayward, CA MSA
 C4190	San German, PR MSA
 C4194	San Jose-Sunnyvale-Santa Clara, CA MSA
@@ -334,73 +818,195 @@ C4202	San Luis Obispo-Paso Robles-Arroyo Grande, CA MSA
 C4206	Santa Barbara-Santa Maria-Goleta, CA MSA
 C4210	Santa Cruz-Watsonville, CA MSA
 C4214	Santa Fe, NM MSA
+C4218	Santa Isabel, PR MicroSA
 C4220	Santa Maria-Santa Barbara, CA MSA
 C4222	Santa Rosa, CA MSA
 C4226	Sarasota-Bradenton-Venice, FL MSA
+C4230	Sault Ste. Marie, MI MicroSA
 C4234	Savannah, GA MSA
+C4238	Sayre, PA MicroSA
+C4242	Scottsbluff, NE MicroSA
+C4246	Scottsboro, AL MicroSA
+C4250	Scottsburg, IN MicroSA
 C4254	Scranton--Wilkes-Barre--Hazleton, PA MSA
+C4258	Seaford, DE MicroSA
+C4262	Searcy, AR MicroSA
 C4266	Seattle-Tacoma-Bellevue, WA MSA
 C4268	Sebastian-Vero Beach, FL MSA
 C4270	Sebring, FL MSA
+C4274	Sedalia, MO MicroSA
+C4278	Selinsgrove, PA MicroSA
+C4282	Selma, AL MicroSA
+C4286	Seneca, SC MicroSA
+C4290	Seneca Falls, NY MicroSA
+C4294	Sevierville, TN MicroSA
+C4298	Seymour, IN MicroSA
+C4302	Shawano, WI MicroSA
+C4306	Shawnee, OK MicroSA
 C4310	Sheboygan, WI MSA
+C4314	Shelby, NC MicroSA
+C4318	Shelbyville, TN MicroSA
+C4322	Shelton, WA MicroSA
+C4326	Sheridan, WY MicroSA
 C4330	Sherman-Denison, TX MSA
+C4332	Show Low, AZ MicroSA
 C4334	Shreveport-Bossier City, LA MSA
+C4338	Sidney, OH MicroSA
 C4342	Sierra Vista-Douglas, AZ MSA
+C4346	Sikeston, MO MicroSA
+C4350	Silver City, NM MicroSA
+C4354	Silverthorne, CO MicroSA
 C4358	Sioux City, IA-NE-SD MSA
 C4362	Sioux Falls, SD MSA
+C4366	Snyder, TX MicroSA
+C4370	Somerset, KY MicroSA
+C4374	Somerset, PA MicroSA
+C4376	Sonora, CA MicroSA
 C4378	South Bend-Mishawaka, IN-MI MSA
+C4386	Southern Pines-Pinehurst, NC MicroSA
 C4390	Spartanburg, SC MSA
+C4394	Spearfish, SD MicroSA
+C4398	Spencer, IA MicroSA
+C4402	Spirit Lake, IA MicroSA
 C4406	Spokane-Spokane Valley, WA MSA
 C4410	Springfield, IL MSA
 C4414	Springfield, MA MSA
 C4418	Springfield, MO MSA
 C4422	Springfield, OH MSA
+C4426	Starkville, MS MicroSA
 C4430	State College, PA MSA
+C4434	Statesboro, GA MicroSA
+C4438	Statesville-Mooresville, NC MicroSA
 C4442	Staunton-Waynesboro, VA MSA
+C4446	Steamboat Springs, CO MicroSA
+C4450	Stephenville, TX MicroSA
+C4454	Sterling, CO MicroSA
+C4458	Sterling, IL MicroSA
+C4462	Stevens Point, WI MicroSA
+C4466	Stillwater, OK MicroSA
 C4470	Stockton-Lodi, CA MSA
+C4474	Storm Lake, IA MicroSA
+C4478	Sturgis, MI MicroSA
+C4486	Sulphur Springs, TX MicroSA
+C4490	Summerville, GA MicroSA
+C4492	Summit Park, UT MicroSA
 C4494	Sumter, SC MSA
+C4498	Sunbury, PA MicroSA
+C4500	Susanville, CA MicroSA
+C4502	Sweetwater, TX MicroSA
 C4506	Syracuse, NY MSA
+C4514	Tahlequah, OK MicroSA
+C4518	Talladega-Sylacauga, AL MicroSA
 C4522	Tallahassee, FL MSA
+C4526	Tallulah, LA MicroSA
 C4530	Tampa-St. Petersburg-Clearwater, FL MSA
+C4534	Taos, NM MicroSA
+C4538	Taylorville, IL MicroSA
 C4546	Terre Haute, IN MSA
 C4550	Texarkana, TX-AR MSA
+C4552	The Dalles, OR MicroSA
 C4554	The Villages, FL MSA
+C4558	Thomaston, GA MicroSA
+C4562	Thomasville, GA MicroSA
+C4564	Thomasville-Lexington, NC MicroSA
+C4566	Tiffin, OH MicroSA
+C4570	Tifton, GA MicroSA
+C4574	Toccoa, GA MicroSA
 C4578	Toledo, OH MSA
 C4582	Topeka, KS MSA
+C4586	Torrington, CT MicroSA
+C4590	Traverse City, MI MicroSA
 C4594	Trenton, NJ MSA
+C4598	Troy, AL MicroSA
+C4602	Truckee-Grass Valley, CA MicroSA
 C4606	Tucson, AZ MSA
+C4610	Tullahoma-Manchester, TN MicroSA
 C4614	Tulsa, OK MSA
+C4618	Tupelo, MS MicroSA
 C4622	Tuscaloosa, AL MSA
+C4626	Tuskegee, AL MicroSA
+C4630	Twin Falls, ID MicroSA
 C4634	Tyler, TX MSA
+C4638	Ukiah, CA MicroSA
+C4642	Union, SC MicroSA
+C4646	Union City, TN-KY MicroSA
+C4650	Urbana, OH MicroSA
 C4652	Urban Honolulu, HI MSA
 C4654	Utica-Rome, NY MSA
+C4658	Utuado, PR MicroSA
+C4662	Uvalde, TX MicroSA
 C4666	Valdosta, GA MSA
 C4670	Vallejo-Fairfield, CA MSA
+C4674	Valley, AL MicroSA
+C4678	Van Wert, OH MicroSA
+C4682	Vermillion, SD MicroSA
+C4686	Vernal, UT MicroSA
+C4690	Vernon, TX MicroSA
 C4694	Vero Beach, FL MSA
+C4698	Vicksburg, MS MicroSA
 C4702	Victoria, TX MSA
+C4708	Vidalia, GA MicroSA
+C4718	Vincennes, IN MicroSA
 C4722	Vineland-Bridgeton, NJ MSA
+C4724	Vineyard Haven, MA MicroSA
 C4726	Virginia Beach-Norfolk-Newport News, VA-NC MSA
 C4730	Visalia-Porterville, CA MSA
+C4734	Wabash, IN MicroSA
 C4738	Waco, TX MSA
+C4742	Wahpeton, ND-MN MicroSA
 C4746	Walla Walla, WA MSA
+C4750	Walterboro, SC MicroSA
+C4754	Wapakoneta, OH MicroSA
 C4758	Warner Robins, GA MSA
+C4762	Warren, PA MicroSA
+C4766	Warrensburg, MO MicroSA
+C4770	Warsaw, IN MicroSA
+C4778	Washington, IN MicroSA
+C4782	Washington, NC MicroSA
+C4786	Washington, OH MicroSA
 C4790	Washington-Arlington-Alexandria, DC-VA-MD-WV MSA
+C4792	Washington Court House, OH MicroSA
 C4794	Waterloo-Cedar Falls, IA MSA
+C4798	Watertown, SD MicroSA
+C4802	Watertown-Fort Atkinson, WI MicroSA
 C4806	Watertown-Fort Drum, NY MSA
+C4810	Wauchula, FL MicroSA
 C4814	Wausau, WI MSA
+C4818	Waycross, GA MicroSA
+C4822	Weatherford, OK MicroSA
 C4826	Weirton-Steubenville, WV-OH MSA
 C4830	Wenatchee, WA MSA
+C4834	West Helena, AR MicroSA
+C4846	West Plains, MO MicroSA
+C4850	West Point, MS MicroSA
 C4854	Wheeling, WV-OH MSA
+C4858	Whitewater-Elkhorn, WI MicroSA
 C4862	Wichita, KS MSA
 C4866	Wichita Falls, TX MSA
 C4870	Williamsport, PA MSA
+C4874	Willimantic, CT MicroSA
+C4878	Williston, ND MicroSA
+C4882	Willmar, MN MicroSA
 C4890	Wilmington, NC MSA
+C4894	Wilmington, OH MicroSA
+C4898	Wilson, NC MicroSA
 C4902	Winchester, VA-WV MSA
+C4906	Winfield, KS MicroSA
+C4908	Winnemucca, NV MicroSA
+C4910	Winona, MN MicroSA
 C4918	Winston-Salem, NC MSA
+C4922	Wisconsin Rapids-Marshfield, WI MicroSA
+C4926	Woodward, OK MicroSA
+C4930	Wooster, OH MicroSA
 C4934	Worcester, MA-CT MSA
+C4938	Worthington, MN MicroSA
 C4942	Yakima, WA MSA
+C4946	Yankton, SD MicroSA
 C4950	Yauco, PR MSA
+C4954	Yazoo City, MS MicroSA
 C4962	York-Hanover, PA MSA
 C4966	Youngstown-Warren-Boardman, OH-PA MSA
 C4970	Yuba City, CA MSA
 C4974	Yuma, AZ MSA
+C4978	Zanesville, OH MicroSA
+C4982	Zapata, TX MicroSA

@@ -5,7 +5,6 @@ This file creates the 'final' version of msa-month level data, with everything b
 """
 import pandas as pd
 # import datetime
-# import ipdb
 # import ujson as json
 import numpy as np
 
@@ -84,18 +83,31 @@ def census(v1, v2, listall=True):
     print('Difference 2 minus 1: %s' % len(l2.difference(l1)))
     if listall:
         names = []
-        for i in list(l2.difference(l1)):
+        print("A few cities in 2 but not 1")
+        for i in list(l2.difference(l1))[0:20]:
             try:
                 if 'Atlanta' in msa_name_lookup[i]:
                     print((i, msa_name_lookup[i]))
                 names.append(msa_name_lookup[i])
             except KeyError:
                 print('Error finding MSA for %s' % i)
-        print('\n'.join([i for i in names if 'Atlanta' in i]))
+        print('\n'.join(names))
         #print(v1.loc[v1['msa'].isin([i for i in names if 'India' in i]),['msa','census_msa_code']])
         #print(v2.loc[v2['msa'].isin([i for i in names if 'India' in i]),['msa','census_msa_code']])
         #print('\n'.join(names))
         #print('\n'.join([i for i in names if 'India' in i]))
+    print('Difference 1 minus 2: %s' % len(l1.difference(l2)))
+    if listall:
+        names = []
+        print("A few cities in 1 but not 2")
+        for i in list(l1.difference(l2))[0:20]:
+            try:
+                #if 'Atlanta' in msa_name_lookup[i]:
+                    #print((i, msa_name_lookup[i]))
+                names.append(msa_name_lookup[i])
+            except KeyError:
+                print('Error finding MSA for %s' % i)
+        print('\n'.join(names))
 
 
 census_names['census_msa_code'] = census_names['qcew_code'].apply(lambda x: '31000US%s0' % x.replace('C', ''))  # 310000 is the MSA code
@@ -103,7 +115,6 @@ msa_name_lookup = {row['census_msa_code']: row['msa'] for index, row in census_n
 
 
 # End test code 7/1
-import ipdb; ipdb.set_trace()
 wage_instruments = pd.read_csv('month_msa_wage_instruments.csv')
 wage_instruments['msa'] = wage_instruments['census_msa_code'].apply(lambda x: msa_name_lookup[x])
 census(wage_instruments, msa_ad_aggregates, listall=False)

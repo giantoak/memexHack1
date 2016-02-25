@@ -24,7 +24,7 @@ out.loc[out.ipums_code == 46, 'qcew_code'] = 'C1154'  # Appleton, WI
 out.loc[out.ipums_code == 47, 'qcew_code'] = 'C1164'  # Arecibo, PR
 out.loc[out.ipums_code == 48, 'qcew_code'] = 'C1170'  # Asheville, NC
 out.loc[out.ipums_code == 50, 'qcew_code'] = 'C1202'  # Athens, GA
-out.loc[out.ipums_code == 52, 'qcew_code'] = 'C1207'  # Atlanta, GA
+out.loc[out.ipums_code == 52, 'qcew_code'] = 'C1206'  # Atlanta, GA
 out.loc[out.ipums_code == 56, 'qcew_code'] = 'C1210'  # Atlantic City, NJ
 out.loc[out.ipums_code == 58, 'qcew_code'] = 'C1222'  # Auburn, AL
 out.loc[out.ipums_code == 60, 'qcew_code'] = 'C1226'  # Augusta, GA

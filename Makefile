@@ -20,6 +20,12 @@ ucr_lemas_msa.csv:
 	$(HTTP_GET) http://$(EXPORT_BUCKET).s3.amazonaws.com/sex_ad_analysis/input/ucr_lemas_msa.csv
 
 ### Data from Stanford
+
+data/cdr/rates-text-and-ist-cleaned.tsv:
+	$(GET_FROM_DEEPDIVE_S3) s3://memex-data/escort_cdr/cdr/rates-text-and-ist-cleaned.tsv.gz
+	mv rates-text-and-ist-cleaned.tsv.gz data/cdr/
+	gunzip data/cdr/rates-text-and-ist-cleaned.tsv.gz
+
 #data/forGiantOak3/doc-provider-timestamp.tsv:
 	## Get data from the Deep Dive data drop, and extract it
 	#$(GET_FROM_DEEPDIVE_S3) s3://memex-data/escort_beta/forGiantOak3.tgz .
@@ -159,7 +165,7 @@ msa_month_ad_aggregates.csv: make_msa_month_ad_aggregates.py ad_price_ad_level.c
 msa_characteristics.csv: make_msa_characteristics.py acs.csv violence_nibrs.csv female_violence_nibrs.csv prostitution_nibrs.csv ucr.csv lemas.csv ad_price_ad_level.csv
 	python make_msa_characteristics.py
 
-ad_prices_price_level.csv: make_ad_prices.py data/cdr/rates-text.tsv data/cdr/ismassageparlorad_text.tsv data/cdr/cbsa-text-and-dom-and-url.tsv data/cdr/phone_numbers-text.tsv  data/dates_cdr.tsv  data/cdr/service-text.tsv data/website_cdr.tsv
+ad_prices_price_level.csv: make_ad_prices.py data/cdr/rates-text-and-ist-cleaned.tsv data/cdr/ismassageparlorad_text.tsv data/cdr/cbsa-text-and-dom-and-url.tsv data/cdr/phone_numbers-text.tsv  data/dates_cdr.tsv  data/cdr/service-text.tsv data/website_cdr.tsv
 	python make_ad_prices.py
 
 data/dates_cdr.tsv: make_dates.py data/cdr/content.tsv

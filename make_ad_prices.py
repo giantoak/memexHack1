@@ -14,7 +14,7 @@ import ipdb
 import numpy as np
 nrows = None
 
-data = pd.read_csv('data/cdr/rates-text.tsv', sep='\t', header=None, nrows=nrows)
+data = pd.read_csv('data/cdr/rates-text-and-ist-cleaned.tsv', sep='\t', header=None, nrows=nrows)
 
 
 def all_call_merge(df, merge_dir):
@@ -39,28 +39,28 @@ def all_call_merge(df, merge_dir):
 
 
 print('There are %s observations' % data.shape[0])  # about 2.1M
-data.rename(columns={1: 'ad_id', 2: 'rate'}, inplace=True)
-data['time_str'] = data['rate'].apply(lambda x: x.split(',')[1])
-data['price'] = data['rate'].apply(lambda x: x.split(',')[0])
-data['unit'] = data['time_str'].apply(lambda x: x.split(' ')[1])
-data = data[data['unit'] != 'DURATION']  # about 1.7M
+data.rename(columns={0: 'ad_id', 1: 'price', 2:'minutes'}, inplace=True)
+#data['time_str'] = data['rate'].apply(lambda x: x.split(',')[1])
+#data['price'] = data['rate'].apply(lambda x: x.split(',')[0])
+#data['unit'] = data['time_str'].apply(lambda x: x.split(' ')[1])
+#data = data[data['unit'] != 'DURATION']  # about 1.7M
 print('There are %s observations after dropping no duration prices' % data.shape[0])
-data['timeValue'] = data['time_str'].apply(lambda x: x.split(' ')[0])
-data['unit'][data['unit'] == 'HOURS'] = 'HOUR'
-data['minutes'] = np.nan
-data.minutes.loc[data['unit'] == 'MINS'] = data.timeValue.loc[data['unit'] == 'MINS'].astype(np.integer)
-data.minutes.loc[data['unit'] == 'HOUR'] = 60*data.timeValue.loc[data['unit'] == 'HOUR'].astype(np.integer)
+#data['timeValue'] = data['time_str'].apply(lambda x: x.split(' ')[0])
+#data['unit'][data['unit'] == 'HOURS'] = 'HOUR'
+#data['minutes'] = np.nan
+#data.minutes.loc[data['unit'] == 'MINS'] = data.timeValue.loc[data['unit'] == 'MINS'].astype(np.integer)
+#data.minutes.loc[data['unit'] == 'HOUR'] = 60*data.timeValue.loc[data['unit'] == 'HOUR'].astype(np.integer)
 
-dollar_synonyms = ['$', 'roses', 'rose', 'bucks', 'kisses', 'kiss', 'dollars', 'dollar', 'dlr']
-for d_s in dollar_synonyms:
-    data.ix[:, 'price'] = data['price'].apply(lambda x: x.replace(d_s, ''))
+#dollar_synonyms = ['$', 'roses', 'rose', 'bucks', 'kisses', 'kiss', 'dollars', 'dollar', 'dlr']
+#for d_s in dollar_synonyms:
+    #data.ix[:, 'price'] = data['price'].apply(lambda x: x.replace(d_s, ''))
 
-other_currencies = ['euro', 'eur', 'eu', 's', '¥', '\xef\xbc\x90', 'aud']
-for o_c in other_currencies:
-    data = data.ix[data['price'].apply(lambda x: o_c not in x)]
+#other_currencies = ['euro', 'eur', 'eu', 's', '¥', '\xef\xbc\x90', 'aud']
+#for o_c in other_currencies:
+    #data = data.ix[data['price'].apply(lambda x: o_c not in x)]
 
-print('There are %s prices after dropping foreign prices' % data.shape[0])
-data.ix[:, 'price'] = data['price'].astype('int')
+#print('There are %s prices after dropping foreign prices' % data.shape[0])
+#data.ix[:, 'price'] = data['price'].astype('int')
 # This code is useful for dealing with the 'price' string problem in
 # sam's rates_locs file from 12/29
 
@@ -95,7 +95,7 @@ out = pd.merge(data, counts, left_on='ad_id', right_index=True)
 del counts
 
 # Begin using MSA data
-msa = pd.read_csv('data/cdr/cbsa-text-and-dom-and-url.tsv',
+msa = pd.read_csv('data/cdr/cbsa-text-and-dom-and-url.ver3.tsv',
                       sep='\t', header=None, names=['ad_id', 'census_msa_code_short','msa_name','macro_micro'], nrows=nrows)
 msa['census_msa_code'] = msa['census_msa_code_short'].apply(lambda x: '31000US%s' % x)  # 310000 is the MSA code
 del msa['census_msa_code_short']
@@ -129,8 +129,7 @@ out = out.merge(sites, how='left')
 del sites
 
 
-del out['unit']
-del out['timeValue']
+#del out['timeValue']
 out.to_csv('ad_prices_price_level.csv', index=False)
 
 # Begin work on fixed prices
@@ -196,7 +195,7 @@ price_ratios_counts=pd.read_csv('price_ratios_counts.csv', header=None, names=['
 price_ratios_counts = price_ratios_counts.set_index('minutes')['ratio']
 
 # Now split the data by whether there's a posted price of 1 hr
-data['1hr'] = data['time_str'] == '1 HOUR'
+data['1hr'] = data['minutes'] == 60
 a = data.groupby('ad_id')['1hr'].sum()
 a = a > 0
 del data['1hr']
