@@ -168,6 +168,9 @@ msa_characteristics.csv: make_msa_characteristics.py acs.csv violence_nibrs.csv 
 ad_prices_price_level.csv: make_ad_prices.py data/cdr/rates-text-and-ist-cleaned.tsv data/cdr/ismassageparlorad_text.tsv data/cdr/cbsa-text-and-dom-and-url.tsv data/cdr/phone_numbers-text.tsv  data/dates_cdr.tsv  data/cdr/service-text.tsv data/website_cdr.tsv
 	python make_ad_prices.py
 
+msa_price.csv: make_ad_and_msa_file.py data/cdr/cbsa-text-and-dom-and-url.ver3.tsv data/cdr/rates-text-and-ist-cleaned.tsv
+	python make_ad_and_msa_file.py 
+
 data/dates_cdr.tsv: make_dates.py data/cdr/content.tsv
 	python make_dates.py
 
