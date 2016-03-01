@@ -120,6 +120,9 @@ out = out.merge(dates, how='left')
 incall_outcall = pd.read_csv('data/cdr/service-text.tsv', sep='\t', nrows=nrows, header=None, names=['ad_id','incall_text'])
 incall_outcall['incall'] = (incall_outcall['incall_text'] == 'incall') | (incall_outcall['incall_text'] == 'incall and outcall')
 incall_outcall['outcall'] = (incall_outcall['incall_text'] == 'outcall') | (incall_outcall['incall_text'] == 'incall and outcall')
+incall_outcall['both'] = incall_outcall['incall_text'] == 'incall and outcall'
+for col in ['incall','outcall','both']:
+    incall_outcall[col] = incall_outcall[col].astype('bool')
 del incall_outcall['incall_text']
 out = out.merge(incall_outcall, how='left')
 del incall_outcall
@@ -214,7 +217,7 @@ price_level = pd.concat([price_level_hourly, price_level_no_hourly], axis=0)
 price_level.sort('1hr', ascending=False, inplace=True)
 ad_level_prices = pd.DataFrame(price_level.groupby('ad_id')['price_per_hour'].mean(), columns=['price_per_hour'])
 ad_level = price_level.drop_duplicates('ad_id')[['ad_id', 'site', 'sex_ad', 'census_msa_code', 'cluster_id', 'date_str',
-                                                 'is_massage_parlor_ad', '1hr', 'incall', 'outcall'
+                                                 'is_massage_parlor_ad', '1hr', 'incall', 'outcall','both'
                                                  ]]
 out = pd.merge(ad_level_prices, ad_level, left_index=True, right_on='ad_id', how='left')
 # Clean up some unused data...

@@ -18,6 +18,9 @@ crosswalk_tract_msa.csv:
 ucr_lemas_msa.csv:
 	# Get UCR data from Greg
 	$(HTTP_GET) http://$(EXPORT_BUCKET).s3.amazonaws.com/sex_ad_analysis/input/ucr_lemas_msa.csv
+### Data from TGG
+ucr_crime_msayearlevel.csv:
+	$(HTTP_GET) http://$(EXPORT_BUCKET).s3.amazonaws.com/sex_ad_analysis/input/ucr_crime_msayearlevel.csv
 
 ### Data from Stanford
 

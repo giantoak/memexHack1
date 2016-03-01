@@ -13,6 +13,9 @@ data = data.reindex()
 data['month'] = data['date'].apply(lambda x: int(x.strftime('%m')))
 data['year'] = data['date'].apply(lambda x: int(x.strftime('%Y')))
 data = data[data['year'] > 2010]
+data['incall'] = data['incall'].astype('bool')
+data['outcall'] = data['outcall'].astype('bool')
+data['both'] = data['both'].astype('bool')
 
 # Do MSA-month aggregations
 month_msa_aggregate_prices = data.groupby(['month', 'year', 'census_msa_code'])['price_per_hour'].aggregate(
@@ -30,8 +33,8 @@ month_msa_aggregate_prices['dp'] = month_msa_aggregate_prices['date_str'].apply(
 
 
 # Do MSA-month aggregations of incall/outcall rates
-month_msa_ad_types = data.groupby(['month', 'year', 'census_msa_code'])['is_massage_parlor_ad',
-                                                                        'incall' ].mean()
+data['both'] = data['incall'] & data['outcall']
+month_msa_ad_types = data.groupby(['month', 'year', 'census_msa_code'])['is_massage_parlor_ad', 'incall' ,'outcall','both'].mean()
 month_msa_ad_types.reset_index(inplace=True)
 month_msa_aggregate_prices = month_msa_aggregate_prices.merge(month_msa_ad_types)
 
