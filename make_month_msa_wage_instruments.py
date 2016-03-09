@@ -3,7 +3,7 @@ import pandas as pd
 # import ipdb
 outputs = []
 try:
-    data = pd.read_csv('temp.csv')
+    data = pd.read_csv('qcew_temp.csv')
     print('Found temp.csv on disk, loading that...')
 except:
     print('No temp.csv found, creating...')
@@ -14,7 +14,7 @@ except:
             new = new[new.agglvl_code == 44]
             outputs.append(new)
     data = pd.concat(outputs, axis=0)
-    data.to_csv('temp.csv', index=False)
+    data.to_csv('qcew_temp.csv', index=False)
 d = data[['area_fips', 'industry_code', 'year', 'qtr',
           u'month1_emplvl', u'month2_emplvl', u'month3_emplvl']]  # Keep only select columns
 e = pd.melt(d,
