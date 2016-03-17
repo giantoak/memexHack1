@@ -13,17 +13,22 @@ clientName <- 'Giant Oak'
 projectName <- '01 Human Trafficking'
 serverPath <- '~/Shared/00 Clients - Current'
 
-rawDatasets <- paste(serverPath, '/', clientName, '/', projectName,
-                     '/Structured Data/01 Raw Datasets', sep="")
-workingDatasets <- paste(serverPath, '/', clientName, '/', projectName,
-                         '/Structured Data/02 Working Datasets/xdata/', sep="")
-finalDatasets <- paste(serverPath, '/', clientName, '/', projectName,
-                       '/Structured Data/03 Final Datasets/xdata/', sep="")
-graphics <- paste(serverPath, '/', clientName, '/', projectName,
-                  '/Structured Data/04 Graphics and Output Data/xdata/', sep="")
+rawDatasets <- ''
+#paste(serverPath, '/', clientName, '/', projectName,
+                     #'/Structured Data/01 Raw Datasets', sep="")
+workingDatasets <- ''
+#paste(serverPath, '/', clientName, '/', projectName,
+                         #'/Structured Data/02 Working Datasets/xdata/', sep="")
+finalDatasets <- ''
 
-regressions <- paste(graphics, "xdata_regressions/",sep="")
-regression_objects <- paste(finalDatasets, "Regression Objects",sep="")
+#paste(serverPath, '/', clientName, '/', projectName,
+                       #'/Structured Data/03 Final Datasets/xdata/', sep="")
+graphics <- ''
+#paste(serverPath, '/', clientName, '/', projectName,
+                  #'/Structured Data/04 Graphics and Output Data/xdata/', sep="")
+
+regressions <- graphics
+regression_objects <- finalDatasets
 #code <- '~/Home/Git/'
 code <- getwd()
 
@@ -60,7 +65,7 @@ rstudio_test_start <-Sys.time()
 
 # source files
 #sourceFiles <- c('XDATA/xdata_analyses_functions', "XDATA/MSA_level_building")
-sourceFiles <- c('XDATA/xdata_analyses_functions')
+sourceFiles <- c('xdata_analyses_functions')
 
 
 if(length(sourceFiles > 0))
@@ -111,7 +116,7 @@ use_tgg_prices <- TRUE
 if (use_cdr_data) {
   
   
-  ad_price_ad_level <- fread(paste0(workingDatasets, "2016-01-21 -- Price Aggregations/ad_price_ad_level_cdr.tsv"),
+  ad_price_ad_level <- fread(paste0(workingDatasets, "ad_price_ad_level_cdr.tsv"),
                              sep="\t",stringsAsFactors = FALSE, data.table=TRUE, colClasses = c('msa_code' = 'character', "flags" = "character"))
 } else {
   #Initial download
@@ -307,7 +312,7 @@ both_inc_out <- ad_price_ad_level[ad_price_ad_level$incall_outcall == 'incall an
 prop.table(table(both_inc_out$hour_price_counts))
 #20% have none, 50% have 1, 20% have 2
 
-saveRDS(both_inc_out, file = paste0(workingDatasets, '2016-01-21 -- Price Aggregations/Within ad outcall/ad_level_both_inc_out.RDS'))
+saveRDS(both_inc_out, file = paste0(workingDatasets, 'ad_level_both_inc_out.RDS'))
 
 
 
@@ -324,7 +329,7 @@ if (!use_cdr_data) {
   
   # BRING IN TGG PRICES ####
   
-  new_prices <- read.table(paste0(workingDatasets, "2016-01-21 -- Price Aggregations/ad_price_ad_level_beta_tgg.tsv"),
+  new_prices <- read.table(paste0(workingDatasets, "ad_price_ad_level_beta_tgg.tsv"),
                            sep = '\t', stringsAsFactors = FALSE, header = TRUE)
   str(new_prices)
   new_prices$CBSACode <- gsub('31000US', '', new_prices$census_msa_code)
@@ -350,7 +355,7 @@ if (!use_cdr_data) {
   
   ggplot(melt (ad_price_ad_level[ad_price_ad_level$price_per_hour_tgg < 500 & ad_price_ad_level$price_per_hour_go < 500, 
                                  list(price_per_hour_tgg, price_per_hour_go)]), mapping = aes (fill = variable, x = value)) + geom_density (alpha = .5)
-  ggsave(filename = paste0(graphics, '/Ad price/TGG vs GO aggregated hourly price comparison.png'))
+  ggsave(filename = paste0(graphics, 'TGG vs GO aggregated hourly price comparison.png'))
   
   
   table(ad_price_ad_level$hour_price_counts, ad_price_ad_level$has_hour_price)
@@ -401,7 +406,7 @@ if (!use_cdr_data) {
   #                       (is.na(ad_price_ad_level$CBSACode) & is.na(ad_price_ad_level$CBSACode_other)), ])[1:100, ]
   
   #Bring in combined MSA dataset
-  msa_both <- readRDS(file = paste0(workingDatasets, "/msa_both_rounds.RDS"))
+  msa_both <- readRDS(file = paste0(workingDatasets, "msa_both_rounds.RDS"))
   setnames(msa_both, c("census_msa_code"), c("census_msa_code_other"))
   msa_both_dedup <- msa_both[!duplicated(msa_both[['ad_id']]), ]
   msa_both_dedup$CBSACode_other <- gsub('31000US', '', msa_both_dedup$census_msa_code_other)
@@ -484,7 +489,7 @@ print(sapply(ad_price_ad_level, FUN = function(x) sum(is.na(x))/nrow(ad_price_ad
 
 
 # MSA-level ####
-msa_level_master <- readRDS(file = paste0(finalDatasets, "Master MSA-Level/msa_level_master.RDS"))
+msa_level_master <- readRDS(file = paste0(finalDatasets, "msa_level_master.RDS"))
 str(msa_level_master)
 #law enforcement 2013 and STD 2012
 msa_level_master$MetropolitanMicropolitanStatisticalArea <- NULL
@@ -507,7 +512,7 @@ if (!shortcut) {
 #how many CBSAs in ad data don't match? and is it because they're micropolitan SAs
 ad_cbsa_not_in_msa_master <- unique(ad_price_ad_level$CBSACode)[!(unique(ad_price_ad_level$CBSACode) %in% unique(msa_level_master$CBSACode))]
 print(length(ad_cbsa_not_in_msa_master))
-cbsa_level_crosswalk <- readRDS(file =paste0(workingDatasets, "Crosswalks/CBSA List.RDS"))
+cbsa_level_crosswalk <- readRDS(file =paste0(workingDatasets, "CBSA List.RDS"))
 print(table(cbsa_level_crosswalk$Metropolitan.Micropolitan.Statistical.Area[cbsa_level_crosswalk$CBSA.Code %in% ad_cbsa_not_in_msa_master]))
 #they're all micropolitan statistical areas
 
@@ -516,7 +521,7 @@ print(sapply(ad_level_with_msa_char, FUN = function(x) sum(is.na(x))/nrow(ad_lev
 }
 
 # MSA - year ####
-msa_year_level_master <- readRDS(file = paste0(finalDatasets, "Master MSA- Year-Level/msa_year_level_master.RDS"))
+msa_year_level_master <- readRDS(file = paste0(finalDatasets, "msa_year_level_master.RDS"))
 str(msa_year_level_master)
 msa_year_level_master$MetropolitanMicropolitanStatisticalArea <- NULL
 msa_year_level_master$CBSATitle <- NULL
@@ -525,6 +530,7 @@ msa_year_level_master$CBSATitle <- NULL
 # MERGE MSA-& YEAR-LEVEL WITH AD-LEVEL #######
 msa_year_level_master <- data.table(msa_year_level_master)
 ad_level_with_msa_year_char <- merge(ad_level_with_msa_char, msa_year_level_master, by = c('CBSACode', 'year'), all.x = TRUE)
+browser()
 
 if (!shortcut) {
 print(str(ad_level_with_msa_year_char))
@@ -685,7 +691,7 @@ go_replication_reg_3 <- tgg_reg(reg_dataset, price_per_hour ~ outcall_only + bot
 sapply(c("go_replication_reg_1","go_replication_reg_2","go_replication_reg_3"),FUN=function(reg_name){
   reg_obj = eval(parse(text=reg_name))
   # summary.lm(reg_obj)
-  filename = paste(regression_objects, "/",reg_name,".rds", sep="")
+  filename = paste(regression_objects, reg_name,".rds", sep="")
   saveRDS(reg_obj,file=filename)
 })
 

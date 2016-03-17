@@ -13,14 +13,13 @@
 clear
 set more off
 
-cd "D:\Dropbox\Giant Oak\Ad Data"
 
 *creating msa_characteristics_crosssection file
-import delimited "D:\Dropbox\Giant Oak\Ad Data\msa_characteristics.csv"
-save "msa_characteristics_crossssection.dta", replace
+import delimited "msa_characteristics.csv"
+save "msa_characteristics_crosssection.dta", replace
 
 * Clean up files to be merged into ad data
-import delimited "D:\Dropbox\Giant Oak\Ad Data\msa_month_characteristics.csv", clear
+import delimited "msa_month_characteristics.csv", clear
 compress
 foreach var of varlist is_massage_parlor_ad-both {
 	ren `var' `var'_mean
@@ -29,49 +28,28 @@ foreach var of varlist is_massage_parlor_ad-both {
 save "msa_month_vars.dta", replace
 
 * Clean up files to be merged into ad data
-import excel "D:\Dropbox\Giant Oak\Ad Data\std.xlsx", sheet("Sheet2") firstrow case(lower) clear
+* import excel "std.xlsx", sheet("Sheet2") firstrow case(lower) clear
+/*import excel "msa_year_std.xlsx", firstrow case(lower) clear*/
+import delimited "msa_year_std.csv", clear
+save msa_year_std.dta, replace
 
-compress
-gen chl = disease=="Chlamydia"
-gen gon = disease=="Gonorrhea"
-gen syp = disease=="Syphilis"
+/*compress*/
+/*gen chl = disease=="Chlamydia"*/
+/*gen gon = disease=="Gonorrhea"*/
+/*gen syp = disease=="Syphilis"*/
 
-foreach var of varlist chl gon syp {
-	gen `var'_cases=`var'*cases
-	gen `var'_rate=`var'*rate
-	}
+/*foreach var of varlist chl gon syp {*/
+	/*gen `var'_cases=`var'*cases*/
+	/*gen `var'_rate=`var'*rate*/
+	/*}*/
 
 * Collapse and clean up, more MSA fixes needed
-collapse (max) *_cases *_rate, by(msa year)	
-ren msa census_msa_code
-replace census_msa_code = "31000US31080" if census_msa_code == "31000US31100"
+/*collapse (max) *_cases *_rate, by(census_msa_code year)	*/
+/*replace census_msa_code = "31000US31080" if census_msa_code == "31000US31100"*/
 
-/*
-* Extrapolate disease trends into 2014
-bysort census_msa_code (year) : gen byte last = _n == _N 
-local n = _N + 1 
-expand 2 if last 
-replace year = year + 1 in `n'/l 
-
-drop last 
-
-foreach var of varlist total_chls-syp_rate {
-	replace `var' = . if year==2014
-	bys census_msa_code: ipolate `var' year, e gen(temp)
-	replace `var' = temp if `var'==.
-	drop temp
-	}
-	
-compress
-
-merge 1:1 census_msa_code year using le_std.dta, gen(le_std)
-destring chl_rateper100k_2012 gon_rateper100k_2012, force replace
-replace chl_rate = chl_rateper100k_2012 if year==2012
-replace gon_rate = gon_rateper100k_2012 if year==2012
-drop calc_num_gon_2012 calc_num_chl_2012 pop_report_gon_2012 pop_report_chl_2012 chl_rateper100k_2012 gon_rateper100k_2012 ftsworn_2013 ftsworn_rateper100k_2013 pop_estimate_2013 le_std
-save "msa_year_disease.dta", replace
-*/
-use "D:\Dropbox\Giant Oak\Ad Data\ad_price_ad_level1.dta", clear
+insheet using "TGG/ad_price_ad_level_cdr.tsv", tab clear
+/*save "ad_pr*/
+/*use "ad_price_ad_level.dta", clear*/
 
 * Quick cleanup
 compress
@@ -220,6 +198,7 @@ scalar cmed = r(p50)
 scalar clong = r(p99)
 
 
+pause
 *For some reason these regressions do not include a variable that breaks up commute time
 
 qui areg p1 out1 both unclear avg_commute out1Xc bothXc unclearXc adcount uniqueproviders population unemployment frac_white web_2-web_19 y2009-y2015 i.m1 if massage!="massage parlor" & p1<1000 & size<201, a(census_msa_code) cluster(census_msa_code)
@@ -511,7 +490,7 @@ areg p1 female_wage_inst_mean female_wage_inst_employment adcount uniqueprovider
 areg p1 female_wage_inst_mean female_wage_inst_employment adcount uniqueproviders out1 both unclear out1Xc bothXc unclearXc web_2-web_19 if massage!=1 & p1<1000 & size<201, a(msa_quarter) cluster(msa_quarter)
 qreg2 p1 female_wage_inst_mean female_wage_inst_employment adcount uniqueproviders out1 both unclear out1Xc bothXc unclearXc web_2-web_19 if massage!=1 & p1<1000 & size<201, cluster(msa_quarter) quantile(.2)
 
-log using "D:\Dropbox\Giant Oak\Ad Data\crime_scratch.log"
+log using "crime_scratch.log"
 
 areg p1 violentpc out1 both unclear avg_commute outXc bothXc unclearXc providercount population unemployment frac_white  if massage!=1 & p1<1000 & size<201 , a(m1) cluster(msayear)
 xi: areg p1 i.price_quintile*rapepc out1 both unclear avg_commute outXc bothXc unclearXc providercount population unemployment frac_white  if massage!=1 & p1<1000 & size<201 , a(m1) cluster(msayear)
