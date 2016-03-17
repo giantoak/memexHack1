@@ -12,7 +12,7 @@ import numpy as np
 
 acs = pd.read_csv('acs.csv')
 ucr_year = pd.read_csv('ucr.csv')
-ucr_avg = ucr_year.groupby('census_msa_code')[['property', 'rape', 'violent']].sum()
+ucr_avg = ucr_year.groupby('census_msa_code')[['property', 'rape', 'violent']].mean()
 ucr_avg.reset_index(inplace=True)
 lemas = pd.read_csv('lemas.csv')
 
